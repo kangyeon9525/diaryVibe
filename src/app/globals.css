@@ -1,0 +1,161 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* -------------------------------------------------------------------------- */
+/* Figma Foundation Color (node 1:7593) — 프리미티브 (--palette-*)              */
+/* -------------------------------------------------------------------------- */
+html {
+  --palette-blue-05: #f0f7ff;
+  --palette-blue-10: #dbeeff;
+  --palette-blue-20: #bddbff;
+  --palette-blue-30: #93beff;
+  --palette-blue-40: #6da5fa;
+  --palette-blue-50: #497cff;
+  --palette-blue-60: #3a5cf3;
+  --palette-blue-70: #274ae1;
+  --palette-blue-80: #1530a6;
+  --palette-blue-90: #0b2184;
+
+  --palette-gray-white: #ffffff;
+  --palette-gray-05: #f2f2f2;
+  --palette-gray-10: #e4e4e4;
+  --palette-gray-20: #d4d3d3;
+  --palette-gray-30: #c7c7c7;
+  --palette-gray-40: #ababab;
+  --palette-gray-50: #919191;
+  --palette-gray-60: #777777;
+  --palette-gray-70: #5f5f5f;
+  --palette-gray-80: #333333;
+  --palette-gray-90: #1c1c1c;
+  --palette-gray-black: #000000;
+
+  --palette-red-05: #fdd7dc;
+  --palette-red-10: #f797a4;
+  --palette-red-20: #f4677a;
+  --palette-red-30: #f03851;
+  --palette-red-40: #e4112e;
+  --palette-red-50: #b40e24;
+  --palette-red-60: #850a1b;
+
+  --palette-green-05: #d3f3e0;
+  --palette-green-10: #92e6b9;
+  --palette-green-20: #15d66f;
+  --palette-green-30: #12b75f;
+  --palette-green-40: #109c51;
+  --palette-green-50: #0e723c;
+  --palette-green-60: #084424;
+
+  --palette-yellow-05: #ffe499;
+  --palette-yellow-10: #ffd666;
+  --palette-yellow-20: #ffc933;
+  --palette-yellow-30: #ffb300;
+  --palette-yellow-40: #eba500;
+  --palette-yellow-50: #d69600;
+  --palette-yellow-60: #b27d00;
+
+  --palette-cool-gray-01: #f8f8fa;
+  --palette-cool-gray-05: #f6f6f9;
+  --palette-cool-gray-10: #edeef2;
+  --palette-cool-gray-20: #dddfe5;
+  --palette-cool-gray-30: #d2d4dd;
+  --palette-cool-gray-40: #c7c9d5;
+  --palette-cool-gray-50: #bbbecd;
+  --palette-cool-gray-60: #b0b3c4;
+
+  --gradient-primary: linear-gradient(127deg, #6da5fa 0%, #92eaf5 100%);
+  --gradient-skeleton: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.6) 48.5%,
+    rgba(255, 255, 255, 0) 100%
+  );
+
+  /* 시맨틱 — 라이트 (기본) */
+  --color-background: var(--palette-gray-white);
+  --color-foreground: var(--palette-gray-black);
+  --color-surface: var(--palette-gray-white);
+  --color-surface-muted: var(--palette-gray-05);
+  --color-border: var(--palette-gray-20);
+  --color-border-strong: var(--palette-gray-40);
+  --color-primary: var(--palette-blue-60);
+  --color-primary-hover: var(--palette-blue-70);
+  --color-on-primary: var(--palette-gray-white);
+  --color-error: var(--palette-red-30);
+  --color-success: var(--palette-green-30);
+  --color-warning: var(--palette-yellow-30);
+  --color-muted: var(--palette-gray-60);
+
+  color-scheme: light;
+}
+
+/* 시스템 다크 선호 */
+@media (prefers-color-scheme: dark) {
+  html:not(.light) {
+    --color-background: var(--palette-gray-90);
+    --color-foreground: var(--palette-gray-05);
+    --color-surface: var(--palette-gray-80);
+    --color-surface-muted: var(--palette-gray-black);
+    --color-border: var(--palette-gray-70);
+    --color-border-strong: var(--palette-gray-50);
+    --color-primary: var(--palette-blue-50);
+    --color-primary-hover: var(--palette-blue-40);
+    --color-on-primary: var(--palette-gray-white);
+    --color-error: var(--palette-red-20);
+    --color-success: var(--palette-green-20);
+    --color-warning: var(--palette-yellow-20);
+    --color-muted: var(--palette-gray-40);
+
+    color-scheme: dark;
+  }
+}
+
+/* 명시적 다크 (클래스 기반 토글용) */
+html.dark {
+  --color-background: var(--palette-gray-90);
+  --color-foreground: var(--palette-gray-05);
+  --color-surface: var(--palette-gray-80);
+  --color-surface-muted: var(--palette-gray-black);
+  --color-border: var(--palette-gray-70);
+  --color-border-strong: var(--palette-gray-50);
+  --color-primary: var(--palette-blue-50);
+  --color-primary-hover: var(--palette-blue-40);
+  --color-on-primary: var(--palette-gray-white);
+  --color-error: var(--palette-red-20);
+  --color-success: var(--palette-green-20);
+  --color-warning: var(--palette-yellow-20);
+  --color-muted: var(--palette-gray-40);
+
+  color-scheme: dark;
+}
+
+/* 명시적 라이트 (시스템이 다크여도 고정) */
+html.light {
+  --color-background: var(--palette-gray-white);
+  --color-foreground: var(--palette-gray-black);
+  --color-surface: var(--palette-gray-white);
+  --color-surface-muted: var(--palette-gray-05);
+  --color-border: var(--palette-gray-20);
+  --color-border-strong: var(--palette-gray-40);
+  --color-primary: var(--palette-blue-60);
+  --color-primary-hover: var(--palette-blue-70);
+  --color-on-primary: var(--palette-gray-white);
+  --color-error: var(--palette-red-30);
+  --color-success: var(--palette-green-30);
+  --color-warning: var(--palette-yellow-30);
+  --color-muted: var(--palette-gray-60);
+
+  color-scheme: light;
+}
+
+body {
+  color: var(--color-foreground);
+  background: var(--color-background);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
