@@ -148,10 +148,148 @@ html.light {
   color-scheme: light;
 }
 
+/* -------------------------------------------------------------------------- */
+/* Figma Foundation Typography (node 1:7885) — 폰트 스택·타이포 토큰 (--typo-*) */
+/* -------------------------------------------------------------------------- */
+html {
+  --typo-bp-desktop: 1024px;
+
+  --font-sans-kr: "Pretendard Variable", Pretendard, system-ui, -apple-system,
+    sans-serif;
+  --font-sans-en: "SUIT Variable", SUIT, system-ui, -apple-system, sans-serif;
+  --font-sans: var(--font-sans-kr);
+
+  /* Web Headline — 모바일 기본, 데스크톱에서 피그마 웹 스펙 */
+  --typo-web-headline-01-font-size: 36px;
+  --typo-web-headline-01-line-height: 48px;
+  --typo-web-headline-01-font-weight: 600;
+  --typo-web-headline-01-letter-spacing: 0;
+
+  --typo-web-headline-02-font-size: 28px;
+  --typo-web-headline-02-line-height: 36px;
+  --typo-web-headline-02-font-weight: 600;
+  --typo-web-headline-02-letter-spacing: 0;
+
+  --typo-web-headline-03-font-size: 24px;
+  --typo-web-headline-03-line-height: 32px;
+  --typo-web-headline-03-font-weight: 600;
+  --typo-web-headline-03-letter-spacing: 0;
+
+  --typo-headline-01-font-size: 24px;
+  --typo-headline-01-line-height: 32px;
+  --typo-headline-01-font-weight: 700;
+  --typo-headline-01-letter-spacing: 0;
+
+  --typo-headline-02-font-size: 22px;
+  --typo-headline-02-line-height: 30px;
+  --typo-headline-02-font-weight: 800;
+  --typo-headline-02-letter-spacing: 0;
+
+  --typo-headline-03-font-size: 20px;
+  --typo-headline-03-line-height: 28px;
+  --typo-headline-03-font-weight: 700;
+  --typo-headline-03-letter-spacing: 0;
+
+  --typo-title-01-font-size: 18px;
+  --typo-title-01-line-height: 24px;
+  --typo-title-01-font-weight: 700;
+  --typo-title-01-letter-spacing: 0;
+
+  --typo-title-02-font-size: 16px;
+  --typo-title-02-line-height: 22px;
+  --typo-title-02-font-weight: 700;
+  --typo-title-02-letter-spacing: 0;
+
+  --typo-title-03-font-size: 14px;
+  --typo-title-03-line-height: 20px;
+  --typo-title-03-font-weight: 700;
+  --typo-title-03-letter-spacing: 0;
+
+  --typo-sub-title-01-font-size: 14px;
+  --typo-sub-title-01-line-height: 22px;
+  --typo-sub-title-01-font-weight: 600;
+  --typo-sub-title-01-letter-spacing: 0;
+
+  --typo-sub-title-02-font-size: 12px;
+  --typo-sub-title-02-line-height: 18px;
+  --typo-sub-title-02-font-weight: 600;
+  --typo-sub-title-02-letter-spacing: 0;
+
+  --typo-body-01-font-size: 16px;
+  --typo-body-01-line-height: 24px;
+  --typo-body-01-font-weight: 500;
+  --typo-body-01-letter-spacing: 0;
+
+  --typo-body-02-m-font-size: 14px;
+  --typo-body-02-m-line-height: 22px;
+  --typo-body-02-m-font-weight: 500;
+  --typo-body-02-m-letter-spacing: 0;
+
+  --typo-body-03-font-size: 12px;
+  --typo-body-03-line-height: 18px;
+  --typo-body-03-font-weight: 500;
+  --typo-body-03-letter-spacing: 0;
+
+  --typo-body-01-regular-font-size: 16px;
+  --typo-body-01-regular-line-height: 24px;
+  --typo-body-01-regular-font-weight: 400;
+  --typo-body-01-regular-letter-spacing: 0;
+
+  --typo-body-02-s-font-size: 14px;
+  --typo-body-02-s-line-height: 20px;
+  --typo-body-02-s-font-weight: 400;
+  --typo-body-02-s-letter-spacing: 0;
+
+  --typo-body-03-regular-font-size: 12px;
+  --typo-body-03-regular-line-height: 18px;
+  --typo-body-03-regular-font-weight: 400;
+  --typo-body-03-regular-letter-spacing: 0;
+
+  --typo-caption-01-font-size: 12px;
+  --typo-caption-01-line-height: 14px;
+  --typo-caption-01-font-weight: 600;
+  --typo-caption-01-letter-spacing: 0;
+
+  --typo-caption-02-m-font-size: 10px;
+  --typo-caption-02-m-line-height: 12px;
+  --typo-caption-02-m-font-weight: 600;
+  --typo-caption-02-m-letter-spacing: 0;
+
+  --typo-caption-02-s-font-size: 10px;
+  --typo-caption-02-s-line-height: 12px;
+  --typo-caption-02-s-font-weight: 500;
+  --typo-caption-02-s-letter-spacing: 0;
+
+  --typo-caption-03-font-size: 8px;
+  --typo-caption-03-line-height: 12px;
+  --typo-caption-03-font-weight: 600;
+  --typo-caption-03-letter-spacing: 0;
+}
+
+@media (min-width: 1024px) {
+  html {
+    --typo-web-headline-01-font-size: 48px;
+    --typo-web-headline-01-line-height: 60px;
+    --typo-web-headline-02-font-size: 36px;
+    --typo-web-headline-02-line-height: 48px;
+    --typo-web-headline-03-font-size: 28px;
+    --typo-web-headline-03-line-height: 36px;
+  }
+}
+
+/* 영문·숫자 구간: SUIT (피그마). 클래스로도 덮어쓸 수 있음 */
+html[lang="en"] {
+  --font-sans: var(--font-sans-en);
+}
+
+.font-en {
+  font-family: var(--font-sans-en);
+}
+
 body {
   color: var(--color-foreground);
   background: var(--color-background);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
 }
 
 @layer utilities {
