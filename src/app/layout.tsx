@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import { NextThemesProvider } from "@/commons/providers/next-themes/next-themes.provider";
+import { ReactQueryProvider } from "@/commons/providers/react-query/react-query.provider";
 import "./globals.css";
 
 const geistSans = localFont({
@@ -29,7 +30,9 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <NextThemesProvider>{children}</NextThemesProvider>
+        <NextThemesProvider>
+          <ReactQueryProvider>{children}</ReactQueryProvider>
+        </NextThemesProvider>
       </body>
     </html>
   );
