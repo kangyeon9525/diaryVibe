@@ -1,0 +1,124 @@
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  margin: 0;
+  border-radius: 8px;
+  font-family: var(--font-sans-kr);
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  border-style: solid;
+  border-width: 1px;
+}
+
+.button:disabled {
+  cursor: not-allowed;
+  opacity: 0.45;
+}
+
+.button:focus {
+  outline: none;
+}
+
+.button:focus-visible {
+  outline: 2px solid var(--palette-blue-50);
+  outline-offset: 2px;
+}
+
+.button[data-size="small"] {
+  min-height: 32px;
+  padding: 0 12px;
+  font-size: var(--typo-sub-title-02-font-size);
+  line-height: var(--typo-sub-title-02-line-height);
+  font-weight: var(--typo-sub-title-02-font-weight);
+  letter-spacing: var(--typo-sub-title-02-letter-spacing);
+}
+
+.button[data-size="medium"] {
+  min-height: 40px;
+  padding: 0 16px;
+  font-size: var(--typo-sub-title-01-font-size);
+  line-height: var(--typo-sub-title-01-line-height);
+  font-weight: var(--typo-sub-title-01-font-weight);
+  letter-spacing: var(--typo-sub-title-01-letter-spacing);
+}
+
+.button[data-size="large"] {
+  min-height: 48px;
+  padding: 0 20px;
+  font-size: var(--typo-title-02-font-size);
+  line-height: var(--typo-title-02-line-height);
+  font-weight: var(--typo-title-02-font-weight);
+  letter-spacing: var(--typo-title-02-letter-spacing);
+}
+
+/* ----- primary ----- */
+.button[data-theme="light"][data-variant="primary"] {
+  background-color: var(--palette-blue-60);
+  border-color: var(--palette-blue-60);
+  color: var(--palette-gray-white);
+}
+
+.button[data-theme="light"][data-variant="primary"]:hover:not(:disabled) {
+  background-color: var(--palette-blue-70);
+  border-color: var(--palette-blue-70);
+}
+
+.button[data-theme="dark"][data-variant="primary"] {
+  background-color: var(--palette-blue-50);
+  border-color: var(--palette-blue-50);
+  color: var(--palette-gray-white);
+}
+
+.button[data-theme="dark"][data-variant="primary"]:hover:not(:disabled) {
+  background-color: var(--palette-blue-40);
+  border-color: var(--palette-blue-40);
+}
+
+/* ----- secondary ----- */
+.button[data-theme="light"][data-variant="secondary"] {
+  background-color: var(--palette-gray-white);
+  border-color: var(--palette-gray-40);
+  color: var(--palette-gray-black);
+}
+
+.button[data-theme="light"][data-variant="secondary"]:hover:not(:disabled) {
+  background-color: var(--palette-gray-05);
+  border-color: var(--palette-gray-40);
+}
+
+.button[data-theme="dark"][data-variant="secondary"] {
+  background-color: var(--palette-gray-80);
+  border-color: var(--palette-gray-50);
+  color: var(--palette-gray-05);
+}
+
+.button[data-theme="dark"][data-variant="secondary"]:hover:not(:disabled) {
+  background-color: var(--palette-gray-70);
+  border-color: var(--palette-gray-50);
+}
+
+/* ----- tertiary ----- */
+.button[data-theme="light"][data-variant="tertiary"] {
+  background-color: transparent;
+  border-color: transparent;
+  color: var(--palette-blue-60);
+}
+
+.button[data-theme="light"][data-variant="tertiary"]:hover:not(:disabled) {
+  background-color: var(--palette-blue-05);
+  border-color: transparent;
+}
+
+.button[data-theme="dark"][data-variant="tertiary"] {
+  background-color: transparent;
+  border-color: transparent;
+  color: var(--palette-blue-50);
+}
+
+.button[data-theme="dark"][data-variant="tertiary"]:hover:not(:disabled) {
+  background-color: var(--palette-gray-70);
+  border-color: transparent;
+}
