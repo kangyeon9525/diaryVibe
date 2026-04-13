@@ -23,7 +23,7 @@ export function Diaries() {
       <div className={styles.search} aria-label="검색 영역">
         <div className={styles.searchInner}>
           <Selectbox
-            variant="secondary"
+            variant="primary"
             theme="light"
             size="large"
             value={filter}
