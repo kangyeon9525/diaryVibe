@@ -1,3 +1,4 @@
+import Image from "next/image";
 import type { ReactNode } from "react";
 import styles from "./styles.module.css";
 
@@ -10,11 +11,17 @@ export function CommonsLayout({ children }: CommonsLayoutProps) {
     <div className={styles.container}>
       <header className={styles.header} aria-label="헤더 영역">
         <div className={styles.headerLogo}>민지의 다이어리</div>
-        <span className={styles.headerDarkMode}>다크모드</span>
       </header>
       <div className={styles.gap} aria-hidden />
       <section className={styles.banner} aria-label="배너 영역">
-        <div className={styles.bannerImage} />
+        <div className={styles.bannerImage}>
+          <Image
+            src="/images/banner.png"
+            alt="배너 이미지"
+            fill
+            className={styles.bannerImg}
+          />
+        </div>
       </section>
       <div className={styles.gap} aria-hidden />
       <nav className={styles.navigation} aria-label="내비게이션 영역">
