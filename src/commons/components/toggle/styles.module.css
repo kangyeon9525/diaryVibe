@@ -1,0 +1,214 @@
+/* 피그마 노드 1:1960 (꺼짐), 1:2991 (켜짐) 연동 완료 - globals 팔레트 토큰 기준 */
+
+.wrapper {
+  display: inline-flex;
+  align-items: center;
+  box-sizing: border-box;
+  cursor: pointer;
+  user-select: none;
+}
+
+.wrapper[data-disabled="true"] {
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+
+.input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+.track {
+  position: relative;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  border-radius: 100px;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.thumb {
+  position: absolute;
+  display: block;
+  background: var(--palette-gray-white);
+  border-radius: 50%;
+  transition: transform 0.2s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* size variants */
+.track[data-size="small"] {
+  width: 44px;
+  height: 24px;
+  padding: 2px;
+}
+
+.track[data-size="small"] .thumb {
+  width: 20px;
+  height: 20px;
+  left: 2px;
+}
+
+.track[data-size="small"][data-checked="true"] .thumb {
+  transform: translateX(20px);
+}
+
+.track[data-size="medium"] {
+  width: 58px;
+  height: 32px;
+  padding: 4px;
+}
+
+.track[data-size="medium"] .thumb {
+  width: 24px;
+  height: 24px;
+  left: 4px;
+}
+
+.track[data-size="medium"][data-checked="true"] .thumb {
+  transform: translateX(26px);
+}
+
+.track[data-size="large"] {
+  width: 72px;
+  height: 40px;
+  padding: 4px;
+}
+
+.track[data-size="large"] .thumb {
+  width: 32px;
+  height: 32px;
+  left: 4px;
+}
+
+.track[data-size="large"][data-checked="true"] .thumb {
+  transform: translateX(32px);
+}
+
+/* primary + theme - unchecked */
+.track[data-variant="primary"][data-theme="light"][data-checked="false"] {
+  background: var(--palette-gray-10);
+}
+
+.track[data-variant="primary"][data-theme="light"][data-checked="true"] {
+  background: var(--palette-blue-60);
+}
+
+.wrapper[data-variant="primary"][data-theme="light"]:hover:not([data-disabled="true"])
+  .track[data-checked="false"] {
+  background: var(--palette-gray-20);
+}
+
+.wrapper[data-variant="primary"][data-theme="light"]:hover:not([data-disabled="true"])
+  .track[data-checked="true"] {
+  background: var(--palette-blue-70);
+}
+
+.track[data-variant="primary"][data-theme="dark"][data-checked="false"] {
+  background: var(--palette-gray-70);
+}
+
+.track[data-variant="primary"][data-theme="dark"][data-checked="true"] {
+  background: var(--palette-blue-50);
+}
+
+.wrapper[data-variant="primary"][data-theme="dark"]:hover:not([data-disabled="true"])
+  .track[data-checked="false"] {
+  background: var(--palette-gray-60);
+}
+
+.wrapper[data-variant="primary"][data-theme="dark"]:hover:not([data-disabled="true"])
+  .track[data-checked="true"] {
+  background: var(--palette-blue-40);
+}
+
+/* secondary + theme - unchecked */
+.track[data-variant="secondary"][data-theme="light"][data-checked="false"] {
+  background: var(--palette-gray-20);
+}
+
+.track[data-variant="secondary"][data-theme="light"][data-checked="true"] {
+  background: var(--palette-green-30);
+}
+
+.wrapper[data-variant="secondary"][data-theme="light"]:hover:not([data-disabled="true"])
+  .track[data-checked="false"] {
+  background: var(--palette-gray-30);
+}
+
+.wrapper[data-variant="secondary"][data-theme="light"]:hover:not([data-disabled="true"])
+  .track[data-checked="true"] {
+  background: var(--palette-green-40);
+}
+
+.track[data-variant="secondary"][data-theme="dark"][data-checked="false"] {
+  background: var(--palette-gray-80);
+}
+
+.track[data-variant="secondary"][data-theme="dark"][data-checked="true"] {
+  background: var(--palette-green-20);
+}
+
+.wrapper[data-variant="secondary"][data-theme="dark"]:hover:not([data-disabled="true"])
+  .track[data-checked="false"] {
+  background: var(--palette-gray-70);
+}
+
+.wrapper[data-variant="secondary"][data-theme="dark"]:hover:not([data-disabled="true"])
+  .track[data-checked="true"] {
+  background: var(--palette-green-10);
+}
+
+/* tertiary + theme - unchecked */
+.track[data-variant="tertiary"][data-theme="light"][data-checked="false"] {
+  background: var(--palette-gray-30);
+}
+
+.track[data-variant="tertiary"][data-theme="light"][data-checked="true"] {
+  background: var(--palette-yellow-30);
+}
+
+.wrapper[data-variant="tertiary"][data-theme="light"]:hover:not([data-disabled="true"])
+  .track[data-checked="false"] {
+  background: var(--palette-gray-40);
+}
+
+.wrapper[data-variant="tertiary"][data-theme="light"]:hover:not([data-disabled="true"])
+  .track[data-checked="true"] {
+  background: var(--palette-yellow-40);
+}
+
+.track[data-variant="tertiary"][data-theme="dark"][data-checked="false"] {
+  background: var(--palette-gray-70);
+}
+
+.track[data-variant="tertiary"][data-theme="dark"][data-checked="true"] {
+  background: var(--palette-yellow-20);
+}
+
+.wrapper[data-variant="tertiary"][data-theme="dark"]:hover:not([data-disabled="true"])
+  .track[data-checked="false"] {
+  background: var(--palette-gray-60);
+}
+
+.wrapper[data-variant="tertiary"][data-theme="dark"]:hover:not([data-disabled="true"])
+  .track[data-checked="true"] {
+  background: var(--palette-yellow-10);
+}
+
+/* focus */
+.input:focus-visible + .track[data-theme="light"] {
+  outline: 2px solid var(--palette-blue-60);
+  outline-offset: 2px;
+}
+
+.input:focus-visible + .track[data-theme="dark"] {
+  outline: 2px solid var(--palette-blue-50);
+  outline-offset: 2px;
+}
