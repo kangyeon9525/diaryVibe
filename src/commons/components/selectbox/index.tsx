@@ -72,3 +72,4 @@ const Selectbox = forwardRef<HTMLSelectElement, SelectboxProps>(
 );
 
 export { Selectbox };
+export default Selectbox;

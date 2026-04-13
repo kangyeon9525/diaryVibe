@@ -72,3 +72,4 @@ const Toggle = forwardRef<HTMLInputElement, ToggleProps>(function Toggle(
 });
 
 export { Toggle };
+export default Toggle;
