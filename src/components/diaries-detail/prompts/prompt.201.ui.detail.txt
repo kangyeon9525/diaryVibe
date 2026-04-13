@@ -10,7 +10,7 @@
 
 ==============================================
 
-조건-피그마) 활용할MCP: CursorTalkToFigmaMCP(채널명: 4dumgofa)
+조건-피그마) 활용할MCP: CursorTalkToFigmaMCP(채널명: xsxqtziy)
 조건-피그마) 구현될 컴포넌트 노드ID(라이트모드: detail-title 영역): 3:1073
 조건-피그마) 구현될 컴포넌트 노드ID(라이트모드: detail-content 영역): 3:1083
 조건-피그마) 구현될 컴포넌트 노드ID(라이트모드: detail-footer 영역): 3:1092
@@ -66,3 +66,7 @@
                 1) detail-footer
                     - 수정버튼: <Button />
                     - 삭제버튼: <Button />
+
+핵심요구사항) gap의 background가 회색으로 되어있는데 흰색으로 변경해줘 (background가 없거나 완전 흰색)
+핵심요구사항) styles_emotion area에 적용된 이미지는 public/images/emtion-*-s.png로 적용해줘줘
+
