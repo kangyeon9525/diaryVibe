@@ -1,0 +1,44 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.gap32 {
+  width: 100%;
+  height: 32px;
+  flex-shrink: 0;
+}
+
+.search {
+  width: 100%;
+  height: 48px;
+  flex-shrink: 0;
+  background-color: var(--color-surface-muted);
+}
+
+.gap42 {
+  width: 100%;
+  height: 42px;
+  flex-shrink: 0;
+}
+
+.main {
+  width: 100%;
+  height: 936px;
+  flex-shrink: 0;
+  background-color: var(--color-surface-muted);
+}
+
+.gap40 {
+  width: 100%;
+  height: 40px;
+  flex-shrink: 0;
+}
+
+.pagination {
+  width: 100%;
+  height: 32px;
+  flex-shrink: 0;
+  background-color: var(--color-surface-muted);
+}
