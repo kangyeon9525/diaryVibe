@@ -18,9 +18,6 @@ const meta = {
       control: "select",
       options: ["small", "medium", "large"],
       description: "Input의 크기",
-      table: {
-        type: { summary: "InputSize" },
-      },
     },
     theme: {
       control: "select",
@@ -49,7 +46,7 @@ type Story = StoryObj<typeof meta>;
 export const Primary: Story = {
   args: {
     variant: "primary",
-    size: "medium" as const,
+    size: "medium",
     theme: "light",
     placeholder: "텍스트를 입력하세요",
   },
@@ -58,7 +55,7 @@ export const Primary: Story = {
 export const Secondary: Story = {
   args: {
     variant: "secondary",
-    size: "medium" as const,
+    size: "medium",
     theme: "light",
     placeholder: "텍스트를 입력하세요",
   },
@@ -67,7 +64,7 @@ export const Secondary: Story = {
 export const Tertiary: Story = {
   args: {
     variant: "tertiary",
-    size: "medium" as const,
+    size: "medium",
     theme: "light",
     placeholder: "텍스트를 입력하세요",
   },
@@ -76,7 +73,7 @@ export const Tertiary: Story = {
 export const Small: Story = {
   args: {
     variant: "primary",
-    size: "small" as const,
+    size: "small",
     theme: "light",
     placeholder: "Small Input",
   },
@@ -85,7 +82,7 @@ export const Small: Story = {
 export const Medium: Story = {
   args: {
     variant: "primary",
-    size: "medium" as const,
+    size: "medium",
     theme: "light",
     placeholder: "Medium Input",
   },
@@ -94,7 +91,7 @@ export const Medium: Story = {
 export const Large: Story = {
   args: {
     variant: "primary",
-    size: "large" as const,
+    size: "large",
     theme: "light",
     placeholder: "Large Input",
   },
@@ -103,7 +100,7 @@ export const Large: Story = {
 export const LightTheme: Story = {
   args: {
     variant: "primary",
-    size: "medium" as const,
+    size: "medium",
     theme: "light",
     placeholder: "Light Theme Input",
   },
@@ -112,7 +109,7 @@ export const LightTheme: Story = {
 export const DarkTheme: Story = {
   args: {
     variant: "primary",
-    size: "medium" as const,
+    size: "medium",
     theme: "dark",
     placeholder: "Dark Theme Input",
   },
@@ -124,7 +121,7 @@ export const DarkTheme: Story = {
 export const Disabled: Story = {
   args: {
     variant: "primary",
-    size: "medium" as const,
+    size: "medium",
     theme: "light",
     placeholder: "Disabled Input",
     disabled: true,
@@ -134,7 +131,7 @@ export const Disabled: Story = {
 export const WithValue: Story = {
   args: {
     variant: "primary",
-    size: "medium" as const,
+    size: "medium",
     theme: "light",
     defaultValue: "입력된 값",
   },
@@ -143,7 +140,7 @@ export const WithValue: Story = {
 export const PasswordType: Story = {
   args: {
     variant: "primary",
-    size: "medium" as const,
+    size: "medium",
     theme: "light",
     type: "password",
     placeholder: "비밀번호를 입력하세요",
@@ -153,7 +150,7 @@ export const PasswordType: Story = {
 export const EmailType: Story = {
   args: {
     variant: "primary",
-    size: "medium" as const,
+    size: "medium",
     theme: "light",
     type: "email",
     placeholder: "이메일을 입력하세요",
@@ -173,9 +170,9 @@ export const AllVariants: Story = {
 export const AllSizes: Story = {
   render: () => (
     <div style={{ display: "flex", flexDirection: "column", gap: "16px", width: "300px" }}>
-      <Input variant="primary" size={"small" as const} theme="light" placeholder="Small Input" />
-      <Input variant="primary" size={"medium" as const} theme="light" placeholder="Medium Input" />
-      <Input variant="primary" size={"large" as const} theme="light" placeholder="Large Input" />
+      <Input variant="primary" size="small" theme="light" placeholder="Small Input" />
+      <Input variant="primary" size="medium" theme="light" placeholder="Medium Input" />
+      <Input variant="primary" size="large" theme="light" placeholder="Large Input" />
     </div>
   ),
 };
