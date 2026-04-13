@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
+import { CommonsLayout } from "@/commons/layout";
 import { ModalProvider } from "@/commons/providers/modal/modal.provider";
 import { NextThemesProvider } from "@/commons/providers/next-themes/next-themes.provider";
 import { ReactQueryProvider } from "@/commons/providers/react-query/react-query.provider";
@@ -33,7 +34,9 @@ export default function RootLayout({
       >
         <NextThemesProvider>
           <ReactQueryProvider>
-            <ModalProvider>{children}</ModalProvider>
+            <ModalProvider>
+              <CommonsLayout>{children}</CommonsLayout>
+            </ModalProvider>
           </ReactQueryProvider>
         </NextThemesProvider>
       </body>
