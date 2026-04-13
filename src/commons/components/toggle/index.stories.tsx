@@ -232,6 +232,55 @@ export const AllThemes: Story = {
   ),
 };
 
+export const DisabledStates: Story = {
+  render: () => (
+    <div style={{ display: "flex", gap: "24px", alignItems: "center" }}>
+      <div style={{ display: "flex", flexDirection: "column", gap: "8px", alignItems: "center" }}>
+        <Toggle variant="primary" size="medium" theme="light" checked={false} disabled />
+        <Toggle variant="primary" size="medium" theme="light" checked={true} disabled />
+        <span style={{ fontSize: "12px", color: "#888" }}>Primary</span>
+      </div>
+      <div style={{ display: "flex", flexDirection: "column", gap: "8px", alignItems: "center" }}>
+        <Toggle variant="secondary" size="medium" theme="light" checked={false} disabled />
+        <Toggle variant="secondary" size="medium" theme="light" checked={true} disabled />
+        <span style={{ fontSize: "12px", color: "#888" }}>Secondary</span>
+      </div>
+      <div style={{ display: "flex", flexDirection: "column", gap: "8px", alignItems: "center" }}>
+        <Toggle variant="tertiary" size="medium" theme="light" checked={false} disabled />
+        <Toggle variant="tertiary" size="medium" theme="light" checked={true} disabled />
+        <span style={{ fontSize: "12px", color: "#888" }}>Tertiary</span>
+      </div>
+    </div>
+  ),
+};
+
+export const DarkThemeVariants: Story = {
+  render: () => (
+    <div style={{ padding: "24px", background: "#1a1a1a" }}>
+      <div style={{ display: "flex", gap: "24px", alignItems: "center" }}>
+        <div style={{ display: "flex", flexDirection: "column", gap: "8px", alignItems: "center" }}>
+          <Toggle variant="primary" size="medium" theme="dark" checked={false} />
+          <Toggle variant="primary" size="medium" theme="dark" checked={true} />
+          <span style={{ fontSize: "12px", color: "#888" }}>Primary</span>
+        </div>
+        <div style={{ display: "flex", flexDirection: "column", gap: "8px", alignItems: "center" }}>
+          <Toggle variant="secondary" size="medium" theme="dark" checked={false} />
+          <Toggle variant="secondary" size="medium" theme="dark" checked={true} />
+          <span style={{ fontSize: "12px", color: "#888" }}>Secondary</span>
+        </div>
+        <div style={{ display: "flex", flexDirection: "column", gap: "8px", alignItems: "center" }}>
+          <Toggle variant="tertiary" size="medium" theme="dark" checked={false} />
+          <Toggle variant="tertiary" size="medium" theme="dark" checked={true} />
+          <span style={{ fontSize: "12px", color: "#888" }}>Tertiary</span>
+        </div>
+      </div>
+    </div>
+  ),
+  parameters: {
+    backgrounds: { default: "dark" },
+  },
+};
+
 export const InteractiveAllVariants: Story = {
   render: () => {
     const [checked, setChecked] = useState(false);
