@@ -5,6 +5,7 @@ import Image from "next/image";
 import { Selectbox } from "@/commons/components/selectbox";
 import { Searchbar } from "@/commons/components/searchbar";
 import { Button } from "@/commons/components/button";
+import { Pagination } from "@/commons/components/pagination";
 import {
   Emotion,
   getEmotionLabel,
@@ -97,6 +98,8 @@ const MOCK_DIARIES: DiaryCard[] = [
 
 export function Diaries() {
   const [filter, setFilter] = useState("all");
+  const [currentPage, setCurrentPage] = useState(1);
+  const totalPages = 5;
 
   const handleSearch = (value: string) => {
     console.log("검색:", value);
@@ -104,6 +107,11 @@ export function Diaries() {
 
   const handleWriteDiary = () => {
     console.log("일기쓰기 클릭");
+  };
+
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+    console.log("페이지 변경:", page);
   };
 
   return (
@@ -173,7 +181,18 @@ export function Diaries() {
         </div>
       </div>
       <div className={styles.gap40} aria-hidden />
-      <div className={styles.pagination} aria-label="페이지네이션 영역" />
+      <div className={styles.pagination} aria-label="페이지네이션 영역">
+        <Pagination
+          variant="primary"
+          theme="light"
+          size="medium"
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPageChange={handlePageChange}
+          maxVisible={5}
+          className={styles.paginationComponent}
+        />
+      </div>
       <div className={styles.gap40} aria-hidden />
     </div>
   );
