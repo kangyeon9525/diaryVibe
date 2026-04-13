@@ -1,4 +1,4 @@
-/* 피그마 노드 1:1816 연동 완료 - globals 팔레트·타이포 토큰 기준 */
+/* 피그마 노드 1:1816(라이트), 1:2773(다크) 연동 완료 - globals 팔레트·타이포 토큰 기준 */
 
 .root {
   display: inline-flex;
@@ -123,8 +123,8 @@
 }
 
 .root[data-variant="primary"][data-theme="dark"] {
-  background: var(--palette-gray-80);
-  border-color: var(--palette-gray-60);
+  background: var(--palette-gray-black);
+  border-color: var(--palette-gray-80);
 }
 
 .root[data-variant="primary"][data-theme="dark"] .icon {
@@ -136,7 +136,7 @@
 }
 
 .root[data-variant="primary"][data-theme="dark"]:hover {
-  border-color: var(--palette-gray-50);
+  border-color: var(--palette-gray-70);
 }
 
 .root[data-variant="primary"][data-theme="dark"]:focus-within {
@@ -146,7 +146,7 @@
 }
 
 .root[data-variant="primary"][data-theme="dark"] .input::placeholder {
-  color: var(--palette-gray-50);
+  color: var(--palette-gray-30);
 }
 
 /* secondary + theme */
