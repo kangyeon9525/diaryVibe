@@ -14,7 +14,7 @@ export type InputProps = {
   variant?: InputVariant;
   size?: InputSize;
   theme?: InputTheme;
-} & Omit<InputHTMLAttributes<HTMLInputElement>, "className"> & {
+} & Omit<InputHTMLAttributes<HTMLInputElement>, "className" | "size"> & {
     className?: string;
   };
 
