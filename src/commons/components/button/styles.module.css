@@ -28,7 +28,7 @@
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  gap: 8px;
+  gap: 4px;
 }
 
 /* size variants */
@@ -50,10 +50,11 @@
 
 .root[data-size="large"] {
   min-height: 48px;
-  padding: 12px 20px;
+  padding: 12px 10px;
   font-size: var(--typo-title-01-font-size);
   line-height: var(--typo-title-01-line-height);
   font-weight: 600;
+  letter-spacing: -0.18px;
 }
 
 /* primary + theme */
