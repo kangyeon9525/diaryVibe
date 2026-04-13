@@ -143,20 +143,74 @@
   border-bottom: 1px solid var(--palette-gray-black);
 }
 
+/* ── retrospect-input ── */
 .retrospectInput {
   display: flex;
-  height: 85px;
-  background-color: var(--palette-blue-10);
+  flex-direction: column;
+  gap: 13px;
+}
+
+.retrospectLabel {
+  font-family: var(--font-sans);
+  font-size: var(--typo-title-01-font-size);
+  line-height: var(--typo-title-01-line-height);
+  font-weight: var(--typo-title-01-font-weight);
+  color: var(--palette-gray-black);
+}
+
+.retrospectInputRow {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  height: 48px;
+}
+
+.retrospectInputWrapper {
+  flex: 1;
+}
+
+.submitButton {
+  width: 51px;
 }
 
 .gap16 {
   display: flex;
   height: 16px;
-  background-color: var(--palette-gray-white);
 }
 
+/* ── retrospect-list ── */
 .retrospectList {
   display: flex;
-  height: 72px;
-  background-color: var(--palette-blue-10);
+  flex-direction: column;
+  border-radius: 16px;
+}
+
+.retrospectItem {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  height: 24px;
+}
+
+.retrospectDivider {
+  margin: 12px 0;
+  height: 1px;
+  background-color: var(--palette-gray-10);
+  border: none;
+}
+
+.retrospectText {
+  font-family: var(--font-sans);
+  font-size: var(--typo-body-01-font-size);
+  line-height: var(--typo-body-01-line-height);
+  font-weight: var(--typo-body-01-font-weight);
+  color: var(--palette-gray-black);
+}
+
+.retrospectDate {
+  font-family: var(--font-sans);
+  font-size: var(--typo-body-01-regular-font-size);
+  line-height: var(--typo-body-01-regular-line-height);
+  font-weight: var(--typo-body-01-regular-font-weight);
+  color: var(--palette-gray-60);
 }

@@ -1,6 +1,8 @@
 import Image from 'next/image';
+import { Fragment } from 'react';
 
 import { Button } from '@/commons/components/button';
+import { Input } from '@/commons/components/input';
 import {
   Emotion,
   getEmotionColor,
@@ -16,6 +18,11 @@ const mockDiary = {
   content:
     '내용이 들어갑니다'.repeat(45),
 };
+
+const mockRetrospects = [
+  { id: 1, content: '3년이 지나고 다시 보니 이때가 그립다.', date: '2024. 09. 24' },
+  { id: 2, content: '3년이 지나고 다시 보니 이때가 그립다.', date: '2024. 09. 24' },
+];
 
 export default function DiariesDetail() {
   return (
@@ -83,9 +90,43 @@ export default function DiariesDetail() {
       </div>
 
       <div className={styles.gap24}></div>
-      <div className={styles.retrospectInput}>retrospect-input</div>
+
+      {/* retrospect-input */}
+      <div className={styles.retrospectInput}>
+        <span className={styles.retrospectLabel}>회고</span>
+        <div className={styles.retrospectInputRow}>
+          <div className={styles.retrospectInputWrapper}>
+            <Input
+              variant="primary"
+              theme="light"
+              placeholder="회고를 남겨보세요."
+            />
+          </div>
+          <Button
+            variant="primary"
+            size="large"
+            theme="light"
+            className={styles.submitButton}
+          >
+            입력
+          </Button>
+        </div>
+      </div>
+
       <div className={styles.gap16}></div>
-      <div className={styles.retrospectList}>retrospect-list</div>
+
+      {/* retrospect-list */}
+      <div className={styles.retrospectList}>
+        {mockRetrospects.map((item, index) => (
+          <Fragment key={item.id}>
+            {index > 0 && <hr className={styles.retrospectDivider} />}
+            <div className={styles.retrospectItem}>
+              <span className={styles.retrospectText}>{item.content}</span>
+              <span className={styles.retrospectDate}>[{item.date}]</span>
+            </div>
+          </Fragment>
+        ))}
+      </div>
     </div>
   );
 }
