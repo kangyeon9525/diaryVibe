@@ -47,9 +47,86 @@
 
 .main {
   width: 100%;
-  height: 936px;
   flex-shrink: 0;
-  background-color: var(--color-surface-muted);
+}
+
+.diaryGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  width: 100%;
+}
+
+.diaryCard {
+  display: flex;
+  flex-direction: column;
+  width: 274px;
+  height: 296px;
+  flex-shrink: 0;
+  background-color: var(--palette-gray-white);
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.cardImage {
+  position: relative;
+  width: 274px;
+  height: 208px;
+  flex-shrink: 0;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.emotionImage {
+  object-fit: cover;
+}
+
+.cardContent {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 8px;
+  width: 274px;
+  flex-shrink: 0;
+}
+
+.cardHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 24px;
+}
+
+.emotionLabel {
+  font-family: var(--font-sans);
+  font-size: var(--typo-sub-title-01-font-size);
+  line-height: var(--typo-sub-title-01-line-height);
+  font-weight: var(--typo-sub-title-01-font-weight);
+  letter-spacing: var(--typo-sub-title-01-letter-spacing);
+}
+
+.date {
+  font-family: var(--font-sans);
+  font-size: var(--typo-body-02-s-font-size);
+  line-height: var(--typo-body-02-s-line-height);
+  font-weight: var(--typo-body-02-s-font-weight);
+  letter-spacing: var(--typo-body-02-s-letter-spacing);
+  color: var(--palette-gray-50);
+}
+
+.cardTitle {
+  width: 100%;
+  height: 24px;
+  font-family: var(--font-sans);
+  font-size: var(--typo-title-01-font-size);
+  line-height: var(--typo-title-01-line-height);
+  font-weight: var(--typo-title-01-font-weight);
+  letter-spacing: var(--typo-title-01-letter-spacing);
+  color: var(--palette-gray-black);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .gap40 {

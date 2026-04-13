@@ -1,10 +1,99 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import { Selectbox } from "@/commons/components/selectbox";
 import { Searchbar } from "@/commons/components/searchbar";
 import { Button } from "@/commons/components/button";
+import {
+  Emotion,
+  getEmotionLabel,
+  getEmotionColor,
+  emotionConfig,
+} from "@/commons/constants/enum";
 import styles from "./styles.module.css";
+
+type DiaryCard = {
+  id: string;
+  emotion: Emotion;
+  date: string;
+  title: string;
+};
+
+const MOCK_DIARIES: DiaryCard[] = [
+  {
+    id: "1",
+    emotion: Emotion.Sad,
+    date: "2024. 03. 12",
+    title: "타이틀 영역 입니다. 한줄까지만 노출 됩니다.",
+  },
+  {
+    id: "2",
+    emotion: Emotion.Surprise,
+    date: "2024. 03. 12",
+    title: "타이틀 영역 입니다.",
+  },
+  {
+    id: "3",
+    emotion: Emotion.Angry,
+    date: "2024. 03. 12",
+    title: "타이틀 영역 입니다.",
+  },
+  {
+    id: "4",
+    emotion: Emotion.Happy,
+    date: "2024. 03. 12",
+    title: "타이틀 영역 입니다.",
+  },
+  {
+    id: "5",
+    emotion: Emotion.Etc,
+    date: "2024. 03. 12",
+    title: "타이틀 영역 입니다. 한줄까지만 노출 됩니다.",
+  },
+  {
+    id: "6",
+    emotion: Emotion.Surprise,
+    date: "2024. 03. 12",
+    title: "타이틀 영역 입니다.",
+  },
+  {
+    id: "7",
+    emotion: Emotion.Angry,
+    date: "2024. 03. 12",
+    title: "타이틀 영역 입니다.",
+  },
+  {
+    id: "8",
+    emotion: Emotion.Happy,
+    date: "2024. 03. 12",
+    title: "타이틀 영역 입니다.",
+  },
+  {
+    id: "9",
+    emotion: Emotion.Sad,
+    date: "2024. 03. 12",
+    title: "타이틀 영역 입니다. 한줄까지만 노출 됩니다.",
+  },
+  {
+    id: "10",
+    emotion: Emotion.Surprise,
+    date: "2024. 03. 12",
+    title: "타이틀 영역 입니다.",
+  },
+  {
+    id: "11",
+    emotion: Emotion.Angry,
+    date: "2024. 03. 12",
+    title: "타이틀 영역 입니다.",
+  },
+  {
+    id: "12",
+    emotion: Emotion.Happy,
+    date: "2024. 03. 12",
+    title: "타이틀 영역 입니다.",
+  },
+];
 
 export function Diaries() {
   const [filter, setFilter] = useState("all");
@@ -55,7 +144,34 @@ export function Diaries() {
         </div>
       </div>
       <div className={styles.gap42} aria-hidden />
-      <div className={styles.main} aria-label="메인 영역" />
+      <div className={styles.main} aria-label="메인 영역">
+        <div className={styles.diaryGrid}>
+          {MOCK_DIARIES.map((diary) => (
+            <div key={diary.id} className={styles.diaryCard}>
+              <div className={styles.cardImage}>
+                <Image
+                  src={`/images/${emotionConfig[diary.emotion].imageFileM.replace('.svg', '.png')}`}
+                  alt={getEmotionLabel(diary.emotion)}
+                  fill
+                  className={styles.emotionImage}
+                />
+              </div>
+              <div className={styles.cardContent}>
+                <div className={styles.cardHeader}>
+                  <span
+                    className={styles.emotionLabel}
+                    style={{ color: getEmotionColor(diary.emotion) }}
+                  >
+                    {getEmotionLabel(diary.emotion)}
+                  </span>
+                  <span className={styles.date}>{diary.date}</span>
+                </div>
+                <div className={styles.cardTitle}>{diary.title}</div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
       <div className={styles.gap40} aria-hidden />
       <div className={styles.pagination} aria-label="페이지네이션 영역" />
       <div className={styles.gap40} aria-hidden />
