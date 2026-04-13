@@ -1,0 +1,99 @@
+[12:12:52.722] [INFO] Initializing Storybook
+[12:12:53.098] [DEBUG] Getting package.json info for C:/Users/김서연/Desktop/VibeCoding/diary/package.json...
+[12:12:53.098] [DEBUG] Getting CLI versions from NPM for storybook...
+[12:12:53.098] [DEBUG] Executing command: npm info storybook version
+[12:12:54.031] [INFO] Adding Storybook version 10.3.5 to your project
+[12:12:54.033] [DEBUG] Project type detected: nextjs
+[12:12:54.034] [DEBUG] Using cached package.json for C:\Users\김서연\Desktop\VibeCoding\diary\package.json...
+[12:12:54.039] [INFO] Framework detected: nextjs-vite
+[12:12:54.040] [DEBUG] Getting installed version for vitest...
+[12:12:54.040] [DEBUG] Executing command: npm ls --json --depth=99 2>NUL
+[12:12:55.017] [DEBUG] Executing command: npm ls --json --depth=0 2>NUL
+[12:12:55.941] [DEBUG] Error finding installations for vitest: ExecaError: Command failed with exit code 1: npm.cmd ls --json "--depth=0" "2>NUL"
+
+npm error code EINVALIDTAGNAME
+npm error Invalid tag name "2>NUL" of package "2>NUL": Tags may not have any characters that encodeURIComponent encodes.
+npm error A complete log of this run can be found in: C:\Users\김서연\AppData\Local\npm-cache\_logs\2026-04-13T03_12_55_269Z-debug-0.log
+
+{
+  "error": {
+    "code": "EINVALIDTAGNAME",
+    "summary": "Invalid tag name \"2>NUL\" of package \"2>NUL\": Tags may not have any characters that encodeURIComponent encodes.",
+    "detail": ""
+  }
+}
+[12:12:55.941] [DEBUG] No installations found for vitest
+[12:12:55.941] [DEBUG] Getting installed version for msw...
+[12:12:55.941] [DEBUG] Executing command: npm ls --json --depth=99 2>NUL
+[12:12:56.847] [DEBUG] Executing command: npm ls --json --depth=0 2>NUL
+[12:12:57.775] [DEBUG] Error finding installations for msw: ExecaError: Command failed with exit code 1: npm.cmd ls --json "--depth=0" "2>NUL"
+
+npm error code EINVALIDTAGNAME
+npm error Invalid tag name "2>NUL" of package "2>NUL": Tags may not have any characters that encodeURIComponent encodes.
+npm error A complete log of this run can be found in: C:\Users\김서연\AppData\Local\npm-cache\_logs\2026-04-13T03_12_57_096Z-debug-0.log
+
+{
+  "error": {
+    "code": "EINVALIDTAGNAME",
+    "summary": "Invalid tag name \"2>NUL\" of package \"2>NUL\": Tags may not have any characters that encodeURIComponent encodes.",
+    "detail": ""
+  }
+}
+[12:12:57.775] [DEBUG] No installations found for msw
+[12:12:57.779] [DEBUG] Using cached package.json for C:\Users\김서연\Desktop\VibeCoding\diary\package.json...
+[12:12:57.779] [DEBUG] Using cached package.json for C:\Users\김서연\Desktop\VibeCoding\diary\package.json...
+[12:12:57.779] [DEBUG] Using cached package.json for C:\Users\김서연\Desktop\VibeCoding\diary\package.json...
+[12:12:57.779] [INFO] - Configuring ESLint plugin
+[12:12:57.780] [DEBUG] Detected JSON config at C:\Users\김서연\Desktop\VibeCoding\diary\.eslintrc.json
+[12:12:57.783] [DEBUG] Getting CLI versions from NPM for @storybook/nextjs-vite...
+[12:12:57.783] [DEBUG] Executing command: npm info @storybook/nextjs-vite version
+[12:12:57.803] [DEBUG] Getting CLI versions from NPM for @chromatic-com/storybook...
+[12:12:57.803] [DEBUG] Executing command: npm info @chromatic-com/storybook version
+[12:12:57.824] [DEBUG] Getting CLI versions from NPM for @storybook/addon-vitest...
+[12:12:57.824] [DEBUG] Executing command: npm info @storybook/addon-vitest version
+[12:12:57.846] [DEBUG] Getting CLI versions from NPM for @storybook/addon-a11y...
+[12:12:57.846] [DEBUG] Executing command: npm info @storybook/addon-a11y version
+[12:12:57.873] [DEBUG] Getting CLI versions from NPM for @storybook/addon-docs...
+[12:12:57.873] [DEBUG] Executing command: npm info @storybook/addon-docs version
+[12:12:57.901] [DEBUG] Getting CLI versions from NPM for @storybook/addon-onboarding...
+[12:12:57.901] [DEBUG] Executing command: npm info @storybook/addon-onboarding version
+[12:12:57.930] [DEBUG] Getting CLI versions from NPM for vite...
+[12:12:57.930] [DEBUG] Executing command: npm info vite version
+[12:12:57.960] [DEBUG] Getting CLI versions from NPM for eslint-plugin-storybook...
+[12:12:57.960] [DEBUG] Executing command: npm info eslint-plugin-storybook version
+[12:13:00.193] [INFO] - Configuring main.ts
+[12:13:00.195] [INFO] - Configuring preview.ts
+[12:13:00.196] [INFO] - Adding Storybook command to package.json
+[12:13:00.197] [DEBUG] Getting package.json info for C:/Users/김서연/Desktop/VibeCoding/diary/package.json...
+[12:13:00.197] [DEBUG] Using cached package.json for C:\Users\김서연\Desktop\VibeCoding\diary\package.json...
+[12:13:00.197] [DEBUG] Using cached package.json for C:\Users\김서연\Desktop\VibeCoding\diary\package.json...
+[12:13:00.198] [INFO] - Copying framework templates
+[12:13:00.235] [DEBUG] Executing command: npm config get registry -ws=false -iwr
+[12:13:00.808] [ERROR] [38;2;241;97;97mError: Cannot find @storybook\nextjs-vite\package.json, Error: Cannot find module '@storybook/nextjs-vite/package.json'
+Require stack:
+- .
+    at Module._resolveFilename (node:internal/modules/cjs/loader:1421:15)
+    at require.resolve (node:internal/modules/helpers:163:19)
+    at resolvePackageDir (file:///C:/Users/%EA%B9%80%EC%84%9C%EC%97%B0/AppData/Local/npm-cache/_npx/ac6065c87c5c24ee/node_modules/storybook/dist/_node-chunks/chunk-YBRG5EIF.js:725:26)
+    at getRendererDir (file:///C:/Users/%EA%B9%80%EC%84%9C%EC%97%B0/AppData/Local/npm-cache/_npx/ac6065c87c5c24ee/node_modules/storybook/dist/_node-chunks/chunk-QTYBYUH2.js:5401:12)
+    at templatePath (file:///C:/Users/%EA%B9%80%EC%84%9C%EC%97%B0/AppData/Local/npm-cache/_npx/ac6065c87c5c24ee/node_modules/storybook/dist/_node-chunks/chunk-QTYBYUH2.js:5484:25)
+    at copyTemplateFiles (file:///C:/Users/%EA%B9%80%EC%84%9C%EC%97%B0/AppData/Local/npm-cache/_npx/ac6065c87c5c24ee/node_modules/storybook/dist/_node-chunks/chunk-QTYBYUH2.js:5499:23)
+    at async baseGenerator (file:///C:/Users/%EA%B9%80%EC%84%9C%EC%97%B0/AppData/Local/npm-cache/_npx/ac6065c87c5c24ee/node_modules/create-storybook/dist/_node-chunks/chunk-5VDIKOHD.js:1298:152)
+    at async GeneratorExecutionCommand.executeProjectGenerator (file:///C:/Users/%EA%B9%80%EC%84%9C%EC%97%B0/AppData/Local/npm-cache/_npx/ac6065c87c5c24ee/node_modules/create-storybook/dist/_node-chunks/chunk-5VDIKOHD.js:1366:101)
+    at async GeneratorExecutionCommand.execute (file:///C:/Users/%EA%B9%80%EC%84%9C%EC%97%B0/AppData/Local/npm-cache/_npx/ac6065c87c5c24ee/node_modules/create-storybook/dist/_node-chunks/chunk-5VDIKOHD.js:1388:27)
+    at async doInitiate (file:///C:/Users/%EA%B9%80%EC%84%9C%EC%97%B0/AppData/Local/npm-cache/_npx/ac6065c87c5c24ee/node_modules/create-storybook/dist/_node-chunks/chunk-5VDIKOHD.js:2886:68)
+
+Error: EPERM: operation not permitted, mkdir 'C:\Users\김서연'
+    at async Module.mkdir (node:internal/fs/promises:856:10)
+    at async file:///C:/Users/%EA%B9%80%EC%84%9C%EC%97%B0/AppData/Local/npm-cache/_npx/ac6065c87c5c24ee/node_modules/storybook/dist/_node-chunks/chunk-QTYBYUH2.js:5250:5[39m
+    at getRendererDir (file:///C:/Users/%EA%B9%80%EC%84%9C%EC%97%B0/AppData/Local/npm-cache/_npx/ac6065c87c5c24ee/node_modules/storybook/dist/_node-chunks/chunk-QTYBYUH2.js:5410:9)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async templatePath (file:///C:/Users/%EA%B9%80%EC%84%9C%EC%97%B0/AppData/Local/npm-cache/_npx/ac6065c87c5c24ee/node_modules/storybook/dist/_node-chunks/chunk-QTYBYUH2.js:5484:19)
+    at async copyTemplateFiles (file:///C:/Users/%EA%B9%80%EC%84%9C%EC%97%B0/AppData/Local/npm-cache/_npx/ac6065c87c5c24ee/node_modules/storybook/dist/_node-chunks/chunk-QTYBYUH2.js:5499:17)
+    at async baseGenerator (file:///C:/Users/%EA%B9%80%EC%84%9C%EC%97%B0/AppData/Local/npm-cache/_npx/ac6065c87c5c24ee/node_modules/create-storybook/dist/_node-chunks/chunk-5VDIKOHD.js:1298:152)
+    at async GeneratorExecutionCommand.executeProjectGenerator (file:///C:/Users/%EA%B9%80%EC%84%9C%EC%97%B0/AppData/Local/npm-cache/_npx/ac6065c87c5c24ee/node_modules/create-storybook/dist/_node-chunks/chunk-5VDIKOHD.js:1366:101)
+    at async GeneratorExecutionCommand.execute (file:///C:/Users/%EA%B9%80%EC%84%9C%EC%97%B0/AppData/Local/npm-cache/_npx/ac6065c87c5c24ee/node_modules/create-storybook/dist/_node-chunks/chunk-5VDIKOHD.js:1388:27)
+    at async doInitiate (file:///C:/Users/%EA%B9%80%EC%84%9C%EC%97%B0/AppData/Local/npm-cache/_npx/ac6065c87c5c24ee/node_modules/create-storybook/dist/_node-chunks/chunk-5VDIKOHD.js:2886:68)
+    at async file:///C:/Users/%EA%B9%80%EC%84%9C%EC%97%B0/AppData/Local/npm-cache/_npx/ac6065c87c5c24ee/node_modules/create-storybook/dist/_node-chunks/chunk-5VDIKOHD.js:2928:20
+    at async withTelemetry (file:///C:/Users/%EA%B9%80%EC%84%9C%EC%97%B0/AppData/Local/npm-cache/_npx/ac6065c87c5c24ee/node_modules/storybook/dist/_node-chunks/chunk-FIR43JGQ.js:225:12)
+[12:13:00.820] [INFO] Storybook collects completely anonymous usage telemetry. We use it to shape Storybook's roadmap and prioritize features. You can learn more, including how to opt out, at https://storybook.js.org/telemetry
