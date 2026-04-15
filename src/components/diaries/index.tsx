@@ -12,6 +12,7 @@ import {
   getEmotionColor,
   emotionConfig,
 } from "@/commons/constants/enum";
+import { useDiariesLinkModal } from "./hooks/index.link.modal.hook";
 import styles from "./styles.module.css";
 
 type DiaryCard = {
@@ -100,13 +101,10 @@ export function Diaries() {
   const [filter, setFilter] = useState("all");
   const [currentPage, setCurrentPage] = useState(1);
   const totalPages = 5;
+  const { openWriteDiaryModal } = useDiariesLinkModal();
 
   const handleSearch = (value: string) => {
     console.log("검색:", value);
-  };
-
-  const handleWriteDiary = () => {
-    console.log("일기쓰기 클릭");
   };
 
   const handlePageChange = (page: number) => {
@@ -115,7 +113,7 @@ export function Diaries() {
   };
 
   return (
-    <div className={styles.container}>
+    <div className={styles.container} data-testid="diaries-page-loaded">
       <div className={styles.gap32} aria-hidden />
       <div className={styles.search} aria-label="검색 영역">
         <div className={styles.searchInner}>
@@ -144,8 +142,9 @@ export function Diaries() {
             variant="primary"
             theme="light"
             size="large"
-            onClick={handleWriteDiary}
+            onClick={openWriteDiaryModal}
             className={styles.writeButton}
+            data-testid="diaries-func-link-write"
           >
             일기쓰기
           </Button>
