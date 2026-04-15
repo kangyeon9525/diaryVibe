@@ -30,6 +30,7 @@
   line-height: var(--typo-title-01-line-height);
   color: var(--palette-gray-black);
   font-family: var(--font-sans);
+  cursor: pointer;
 }
 
 /* ── Gap ── */
