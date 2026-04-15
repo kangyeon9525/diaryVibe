@@ -34,7 +34,7 @@ alwaysApply: false
 
 6. TEST 조건
     - TDD기반으로 playwright 테스트를 먼저 작성할 것.
-    - playwright.config.ts 설정은 변경하지 말 것.
+    - Playwright 기본 설정 파일(playwright.config.js 등)은 요구사항 없이 변경하지 말 것.
     - playwright 테스트는 package.json의 scripts에 등록된 명령으로만 테스트 할 것.
     - playwright 테스트에 mock 데이터 사용하지 말고, 실제 데이터를 테스트로 사용할 것.
     - playwright 테스트에 API 테스트가 필요한 경우, 응답 결과를 하드코딩하지 말 것.

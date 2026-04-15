@@ -19,16 +19,13 @@ test.describe("commons layout 링크·라우팅", () => {
     await expect(diariesTab).toHaveAttribute("data-active", "true");
   });
 
-  test("일기 상세 경로에서도 일기 탭이 활성 상태로 유지된다", async ({ page }) => {
+  test("일기 상세 경로에서는 url.ts 기준 내비가 렌더되지 않는다", async ({ page }) => {
     const detailPath = getDiaryDetailPath("1");
     await page.goto(detailPath);
     await expect(page.getByTestId("commons-layout-root")).toBeVisible();
     await expect(page).toHaveURL(detailPath);
 
-    await expect(page.getByTestId("layout-nav-diaries")).toHaveAttribute(
-      "data-active",
-      "true",
-    );
+    await expect(page.getByTestId("layout-area-navigation")).toHaveCount(0);
   });
 
   test("헤더 로고 클릭 시 일기 목록 경로로 이동한다", async ({ page }) => {
