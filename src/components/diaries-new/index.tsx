@@ -11,6 +11,7 @@ import {
   getEmotionLabel,
 } from "@/commons/constants/enum";
 
+import { useDiariesNewLinkModalClose } from "./hooks/index.link.modal.close.hook";
 import styles from "./styles.module.css";
 
 /** 피그마 Frame 61 라디오 순서(행복 → 슬픔 → 놀람 → 화남 → 기타) */
@@ -26,6 +27,7 @@ export function DiariesNew() {
   const [emotion, setEmotion] = useState<EmotionType>(Emotion.Happy);
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
+  const { handleClose } = useDiariesNewLinkModalClose();
 
   return (
     <div className={styles.wrapper}>
@@ -101,6 +103,8 @@ export function DiariesNew() {
           theme="light"
           size="large"
           className={styles.footerButton}
+          data-testid="diaries-new-func-link-modal-close"
+          onClick={handleClose}
         >
           닫기
         </Button>
