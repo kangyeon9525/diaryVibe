@@ -1,7 +1,10 @@
 "use client";
 
-import { Button } from "@/commons/components/button";
+import Image from "next/image";
 import type { ReactNode } from "react";
+
+import { Button } from "@/commons/components/button";
+
 import styles from "./styles.module.css";
 
 export type ModalVariant = "info" | "danger";
@@ -12,89 +15,106 @@ export type ModalProps = {
   variant?: ModalVariant;
   actions?: ModalActions;
   theme?: ModalTheme;
-  title: ReactNode;
+  title: string;
   description?: ReactNode;
-  confirmLabel?: string;
-  cancelLabel?: string;
+  confirmText?: string;
+  cancelText?: string;
   onConfirm?: () => void;
   onCancel?: () => void;
+  children?: ReactNode;
+  className?: string;
 };
 
-function iconLabel(variant: ModalVariant): string {
-  return variant === "danger" ? "!" : "i";
-}
+const ICON_INFO = "/icons/check_outline_light_xs.svg";
+const ICON_DANGER = "/icons/emotion-angry-m.svg";
 
-export function Modal({
+function Modal({
   variant = "info",
   actions = "single",
   theme = "light",
   title,
   description,
-  confirmLabel = "확인",
-  cancelLabel = "취소",
+  confirmText = "확인",
+  cancelText = "취소",
   onConfirm,
   onCancel,
+  children,
+  className,
 }: ModalProps) {
-  const actionRowClass = [
-    styles.actions,
-    actions === "single" ? styles.actionsSingle : styles.actionsDual,
-  ].join(" ");
+  const rootClass = [styles.root, className].filter(Boolean).join(" ");
+
+  const iconSrc = variant === "danger" ? ICON_DANGER : ICON_INFO;
+  const iconSize = variant === "danger" ? 24 : 20;
 
   return (
-    <div
-      className={styles.root}
+    <section
+      className={rootClass}
       data-variant={variant}
-      data-actions={actions}
       data-theme={theme}
+      role="document"
+      aria-labelledby="modal-title"
     >
-      <div className={styles.body}>
-        <div className={styles.iconWrap} aria-hidden>
-          <span className={styles.iconGlyph}>{iconLabel(variant)}</span>
-        </div>
-        <div className={styles.textBlock}>
-          <h2 className={styles.title}>{title}</h2>
-          {description != null ? (
-            <p className={styles.description}>{description}</p>
-          ) : null}
+      <div className={styles.iconRow}>
+        <div className={styles.iconCircle} aria-hidden>
+          <Image
+            src={iconSrc}
+            alt=""
+            width={iconSize}
+            height={iconSize}
+            aria-hidden
+          />
         </div>
       </div>
-      <div className={actionRowClass}>
+
+      <h2 id="modal-title" className={styles.title}>
+        {title}
+      </h2>
+
+      {description != null && description !== "" ? (
+        <p className={styles.description}>{description}</p>
+      ) : null}
+
+      {children != null ? <div className={styles.body}>{children}</div> : null}
+
+      <div className={styles.actions} data-actions={actions}>
         {actions === "dual" ? (
           <>
             <Button
               type="button"
               variant="secondary"
-              size="medium"
+              size="large"
               theme="light"
-              className={styles.dualButton}
+              className={styles.buttonDual}
               onClick={onCancel}
             >
-              {cancelLabel}
+              {cancelText}
             </Button>
             <Button
               type="button"
               variant="primary"
-              size="medium"
+              size="large"
               theme="light"
-              className={styles.dualButton}
+              className={styles.buttonDual}
               onClick={onConfirm}
             >
-              {confirmLabel}
+              {confirmText}
             </Button>
           </>
         ) : (
           <Button
             type="button"
             variant="primary"
-            size="medium"
+            size="large"
             theme="light"
-            className={styles.singleButton}
+            className={styles.buttonSingle}
             onClick={onConfirm}
           >
-            {confirmLabel}
+            {confirmText}
           </Button>
         )}
       </div>
-    </div>
+    </section>
   );
 }
+
+export { Modal };

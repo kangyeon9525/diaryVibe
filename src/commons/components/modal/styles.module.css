@@ -1,126 +1,116 @@
+/* Figma nodes 3:1046 (info·single), 3:670 (info·dual) — globals 팔레트·타이포 토큰 정합 */
+
 .root {
   display: flex;
   flex-direction: column;
-  gap: 24px;
-  width: 100%;
-  min-width: 0;
-  max-width: 400px;
+  align-items: stretch;
   box-sizing: border-box;
-  font-family: var(--font-sans);
+  width: 100%;
+  max-width: 480px;
+  margin: 0;
+  padding: 24px;
+  background: transparent;
 }
 
-.body {
+.iconRow {
   display: flex;
   flex-direction: row;
-  gap: 16px;
-  align-items: flex-start;
-  min-width: 0;
+  justify-content: center;
+  align-items: center;
+  margin: 0 0 16px 0;
 }
 
-.iconWrap {
+.iconCircle {
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  flex-shrink: 0;
-  width: 48px;
-  height: 48px;
-  border-radius: 999px;
   box-sizing: border-box;
+  width: 48px;
+  min-height: 48px;
+  padding: 0;
+  border-radius: 999px;
 }
 
-.iconGlyph {
-  font-size: var(--typo-title-02-font-size);
-  line-height: 1;
-  font-weight: 700;
+.root[data-variant="info"] .iconCircle {
+  background: var(--palette-gray-05);
 }
 
-.textBlock {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  min-width: 0;
-  flex: 1;
+.root[data-variant="danger"] .iconCircle {
+  background: var(--palette-red-05);
 }
 
 .title {
   margin: 0;
-  font-size: var(--typo-headline-03-font-size);
-  line-height: var(--typo-headline-03-line-height);
-  font-weight: var(--typo-headline-03-font-weight);
+  padding: 0;
+  text-align: center;
+  font-family: var(--font-sans);
+  font-size: 24px;
+  line-height: 24px;
+  font-weight: 700;
+  letter-spacing: -0.24px;
+  color: var(--palette-gray-black);
+}
+
+.root[data-theme="dark"] .title {
+  color: var(--palette-gray-05);
+}
+
+.root[data-variant="danger"] .title {
+  color: var(--palette-red-40);
+}
+
+.root[data-theme="dark"][data-variant="danger"] .title {
+  color: var(--palette-red-20);
 }
 
 .description {
-  margin: 0;
-  font-size: var(--typo-body-02-s-font-size);
-  line-height: var(--typo-body-02-s-line-height);
-  font-weight: var(--typo-body-02-s-font-weight);
-}
-
-.actions {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
-  gap: 8px;
-  width: 100%;
-  box-sizing: border-box;
-}
-
-.actionsSingle {
-  flex-direction: column;
-}
-
-.actionsDual {
-  flex-direction: row;
-  justify-content: flex-end;
-}
-
-.dualButton {
-  width: 104px;
-}
-
-.singleButton {
-  width: 100%;
-}
-
-/* theme + variant — 라이트 */
-.root[data-theme="light"] {
-  color: var(--palette-gray-black);
-}
-
-.root[data-theme="light"] .description {
-  color: var(--palette-gray-60);
-}
-
-.root[data-theme="light"][data-variant="info"] .iconWrap {
-  background: var(--palette-blue-05);
-  color: var(--palette-blue-60);
-}
-
-.root[data-theme="light"][data-variant="danger"] .iconWrap {
-  background: var(--palette-red-05);
-  color: var(--palette-red-30);
-}
-
-.root[data-theme="light"][data-variant="danger"] .title {
-  color: var(--palette-gray-black);
-}
-
-/* theme + variant — 다크 */
-.root[data-theme="dark"] {
-  color: var(--palette-gray-05);
+  margin: 16px 0 0 0;
+  padding: 0;
+  text-align: center;
+  font-family: var(--font-sans);
+  font-size: 20px;
+  line-height: 24px;
+  font-weight: 500;
+  letter-spacing: -0.2px;
+  color: var(--palette-gray-80);
 }
 
 .root[data-theme="dark"] .description {
   color: var(--palette-gray-40);
 }
 
-.root[data-theme="dark"][data-variant="info"] .iconWrap {
-  background: rgba(73, 124, 255, 0.2);
-  color: var(--palette-blue-40);
+.body {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  margin: 16px 0 0 0;
 }
 
-.root[data-theme="dark"][data-variant="danger"] .iconWrap {
-  background: rgba(240, 56, 81, 0.2);
-  color: var(--palette-red-20);
+.actions {
+  display: flex;
+  box-sizing: border-box;
+  width: 100%;
+  margin-top: 40px;
+}
+
+.actions[data-actions="single"] {
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.actions[data-actions="dual"] {
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: center;
+  gap: 21px;
+}
+
+.buttonSingle {
+  width: 100%;
+}
+
+.buttonDual {
+  width: 104px;
 }
