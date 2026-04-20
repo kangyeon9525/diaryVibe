@@ -7,7 +7,6 @@
   box-sizing: border-box;
   width: 480px;
   background: var(--palette-gray-white);
-  border: 1px solid var(--palette-gray-20);
   border-radius: 24px;
   padding: 24px;
   gap: 40px;
@@ -15,7 +14,6 @@
 
 .root[data-theme="dark"] {
   background: var(--palette-gray-90);
-  border-color: var(--palette-gray-80);
 }
 
 .content {
@@ -39,6 +37,14 @@
 
 .root[data-theme="dark"] .title {
   color: var(--palette-gray-white);
+}
+
+.root[data-variant="danger"] .title {
+  color: var(--palette-red-30);
+}
+
+.root[data-variant="danger"][data-theme="dark"] .title {
+  color: var(--palette-red-20);
 }
 
 .description {

@@ -35,17 +35,9 @@ const Modal = forwardRef<HTMLDivElement, ModalProps>(function Modal(
   ref,
 ) {
   const isDark = theme === "dark";
-  const secondaryButtonTheme = isDark ? "dark" : "light";
 
-  let primaryVariant: "primary" | "secondary" = "primary";
-  let primaryButtonTheme: "light" | "dark" = "light";
-  if (actions === "single" && isDark) {
-    primaryVariant = "secondary";
-    primaryButtonTheme = "light";
-  } else if (isDark) {
-    primaryVariant = "primary";
-    primaryButtonTheme = "dark";
-  }
+  const primaryVariant: "primary" | "secondary" =
+    actions === "single" && isDark ? "secondary" : "primary";
 
   return (
     <div
@@ -65,7 +57,7 @@ const Modal = forwardRef<HTMLDivElement, ModalProps>(function Modal(
           <Button
             variant="secondary"
             size="large"
-            theme={secondaryButtonTheme}
+            theme="light"
             onClick={onSecondaryClick}
             className={styles.dualButton}
           >
@@ -75,7 +67,7 @@ const Modal = forwardRef<HTMLDivElement, ModalProps>(function Modal(
         <Button
           variant={primaryVariant}
           size="large"
-          theme={primaryButtonTheme}
+          theme="light"
           onClick={onPrimaryClick}
           className={actions === "single" ? styles.singleButton : styles.dualButton}
         >
