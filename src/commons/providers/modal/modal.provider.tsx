@@ -7,9 +7,15 @@ import {
   useEffect,
   useMemo,
   useState,
-  type ReactNode,
 } from "react";
+import type { ReactNode } from "react";
 import { createPortal } from "react-dom";
+import styles from "./styles.module.css";
+
+type ModalItem = {
+  id: string;
+  content: ReactNode;
+};
 
 type ModalContextValue = {
   open: (content: ReactNode) => void;
@@ -27,7 +33,11 @@ export function useModal(): ModalContextValue {
   return ctx;
 }
 
-function ModalPortal({ children }: { children: ReactNode }) {
+type ModalPortalProps = {
+  children: ReactNode;
+};
+
+function ModalPortal({ children }: ModalPortalProps) {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -41,55 +51,82 @@ function ModalPortal({ children }: { children: ReactNode }) {
   return createPortal(children, document.body);
 }
 
-export function ModalProvider({ children }: { children: ReactNode }) {
-  const [modalContent, setModalContent] = useState<ReactNode | null>(null);
+type ModalProviderProps = {
+  children: ReactNode;
+};
+
+export function ModalProvider({ children }: ModalProviderProps) {
+  const [modalStack, setModalStack] = useState<ModalItem[]>([]);
 
   const open = useCallback((content: ReactNode) => {
-    setModalContent(content);
+    const id = `modal-${Date.now()}-${Math.random()}`;
+    setModalStack((prev) => [...prev, { id, content }]);
   }, []);
 
   const close = useCallback(() => {
-    setModalContent(null);
+    setModalStack((prev) => prev.slice(0, -1));
   }, []);
 
   const value = useMemo<ModalContextValue>(
     () => ({
       open,
       close,
-      isOpen: modalContent != null,
+      isOpen: modalStack.length > 0,
     }),
-    [open, close, modalContent],
+    [open, close, modalStack.length],
   );
 
   useEffect(() => {
-    if (modalContent == null) return;
+    if (modalStack.length === 0) return;
     const onKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") close();
     };
     document.addEventListener("keydown", onKeyDown);
     return () => document.removeEventListener("keydown", onKeyDown);
-  }, [modalContent, close]);
+  }, [modalStack.length, close]);
+
+  useEffect(() => {
+    if (modalStack.length > 0) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [modalStack.length]);
 
   return (
     <ModalContext.Provider value={value}>
       {children}
       <ModalPortal>
-        {modalContent != null ? (
-          <div
-            className="fixed inset-0 z-[100] flex items-center justify-center bg-black/50 p-4"
-            onClick={close}
-            role="presentation"
-          >
+        {modalStack.map((modal, index) => (
+          <div key={modal.id}>
             <div
-              className="relative rounded-lg bg-white p-6 shadow-lg dark:bg-zinc-900"
-              onClick={(e) => e.stopPropagation()}
-              role="dialog"
-              aria-modal="true"
+              className={styles.backdrop}
+              style={{ zIndex: 100 + index * 2 }}
+              onClick={() => {
+                if (index === modalStack.length - 1) {
+                  close();
+                }
+              }}
+              role="presentation"
+            />
+            <div
+              className={styles.container}
+              style={{ zIndex: 100 + index * 2 + 1 }}
             >
-              {modalContent}
+              <div
+                className={styles.dialog}
+                onClick={(e) => e.stopPropagation()}
+                role="dialog"
+                aria-modal="true"
+              >
+                {modal.content}
+              </div>
             </div>
           </div>
-        ) : null}
+        ))}
       </ModalPortal>
     </ModalContext.Provider>
   );
