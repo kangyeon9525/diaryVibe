@@ -1,0 +1,126 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  width: 100%;
+  min-width: 0;
+  max-width: 400px;
+  box-sizing: border-box;
+  font-family: var(--font-sans);
+}
+
+.body {
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+  align-items: flex-start;
+  min-width: 0;
+}
+
+.iconWrap {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  border-radius: 999px;
+  box-sizing: border-box;
+}
+
+.iconGlyph {
+  font-size: var(--typo-title-02-font-size);
+  line-height: 1;
+  font-weight: 700;
+}
+
+.textBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+  flex: 1;
+}
+
+.title {
+  margin: 0;
+  font-size: var(--typo-headline-03-font-size);
+  line-height: var(--typo-headline-03-line-height);
+  font-weight: var(--typo-headline-03-font-weight);
+}
+
+.description {
+  margin: 0;
+  font-size: var(--typo-body-02-s-font-size);
+  line-height: var(--typo-body-02-s-line-height);
+  font-weight: var(--typo-body-02-s-font-weight);
+}
+
+.actions {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  gap: 8px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.actionsSingle {
+  flex-direction: column;
+}
+
+.actionsDual {
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+.dualButton {
+  width: 104px;
+}
+
+.singleButton {
+  width: 100%;
+}
+
+/* theme + variant — 라이트 */
+.root[data-theme="light"] {
+  color: var(--palette-gray-black);
+}
+
+.root[data-theme="light"] .description {
+  color: var(--palette-gray-60);
+}
+
+.root[data-theme="light"][data-variant="info"] .iconWrap {
+  background: var(--palette-blue-05);
+  color: var(--palette-blue-60);
+}
+
+.root[data-theme="light"][data-variant="danger"] .iconWrap {
+  background: var(--palette-red-05);
+  color: var(--palette-red-30);
+}
+
+.root[data-theme="light"][data-variant="danger"] .title {
+  color: var(--palette-gray-black);
+}
+
+/* theme + variant — 다크 */
+.root[data-theme="dark"] {
+  color: var(--palette-gray-05);
+}
+
+.root[data-theme="dark"] .description {
+  color: var(--palette-gray-40);
+}
+
+.root[data-theme="dark"][data-variant="info"] .iconWrap {
+  background: rgba(73, 124, 255, 0.2);
+  color: var(--palette-blue-40);
+}
+
+.root[data-theme="dark"][data-variant="danger"] .iconWrap {
+  background: rgba(240, 56, 81, 0.2);
+  color: var(--palette-red-20);
+}
