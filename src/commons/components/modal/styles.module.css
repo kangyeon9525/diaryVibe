@@ -1,116 +1,72 @@
-/* Figma nodes 3:1046 (info·single), 3:670 (info·dual) — globals 팔레트·타이포 토큰 정합 */
+/* 피그마 노드 3:1046(single), 3:670(dual) 연동 완료 - globals 팔레트·타이포 토큰 기준 */
 
 .root {
   display: flex;
   flex-direction: column;
   align-items: stretch;
   box-sizing: border-box;
-  width: 100%;
-  max-width: 480px;
-  margin: 0;
+  width: 480px;
+  background: var(--palette-gray-white);
+  border-radius: 24px;
   padding: 24px;
-  background: transparent;
+  gap: 40px;
 }
 
-.iconRow {
+.root[data-theme="dark"] {
+  background: var(--palette-gray-80);
+}
+
+.content {
   display: flex;
-  flex-direction: row;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
-  margin: 0 0 16px 0;
-}
-
-.iconCircle {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  box-sizing: border-box;
-  width: 48px;
-  min-height: 48px;
-  padding: 0;
-  border-radius: 999px;
-}
-
-.root[data-variant="info"] .iconCircle {
-  background: var(--palette-gray-05);
-}
-
-.root[data-variant="danger"] .iconCircle {
-  background: var(--palette-red-05);
+  gap: 16px;
 }
 
 .title {
   margin: 0;
-  padding: 0;
-  text-align: center;
   font-family: var(--font-sans);
   font-size: 24px;
   line-height: 24px;
   font-weight: 700;
   letter-spacing: -0.24px;
   color: var(--palette-gray-black);
+  text-align: center;
+  width: 100%;
 }
 
 .root[data-theme="dark"] .title {
-  color: var(--palette-gray-05);
-}
-
-.root[data-variant="danger"] .title {
-  color: var(--palette-red-40);
-}
-
-.root[data-theme="dark"][data-variant="danger"] .title {
-  color: var(--palette-red-20);
+  color: var(--palette-gray-white);
 }
 
 .description {
-  margin: 16px 0 0 0;
-  padding: 0;
-  text-align: center;
+  margin: 0;
   font-family: var(--font-sans);
   font-size: 20px;
   line-height: 24px;
   font-weight: 500;
   letter-spacing: -0.2px;
   color: var(--palette-gray-80);
+  text-align: center;
+  width: 100%;
 }
 
 .root[data-theme="dark"] .description {
-  color: var(--palette-gray-40);
-}
-
-.body {
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  margin: 16px 0 0 0;
+  color: var(--palette-gray-05);
 }
 
 .actions {
   display: flex;
-  box-sizing: border-box;
-  width: 100%;
-  margin-top: 40px;
-}
-
-.actions[data-actions="single"] {
-  flex-direction: column;
-  align-items: stretch;
-}
-
-.actions[data-actions="dual"] {
   flex-direction: row;
-  flex-wrap: nowrap;
   align-items: center;
   justify-content: center;
   gap: 21px;
 }
 
-.buttonSingle {
+.singleButton {
   width: 100%;
 }
 
-.buttonDual {
+.dualButton {
   width: 104px;
 }
