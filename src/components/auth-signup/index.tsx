@@ -8,8 +8,10 @@ import styles from "./styles.module.css";
 export function AuthSignup() {
   return (
     <main className={styles.page}>
-      <div className={styles.shell}>
-        <section className={styles.card} aria-labelledby="auth-signup-title">
+      <section className={styles.card} aria-labelledby="auth-signup-title">
+        <div className={styles.accent} aria-hidden />
+
+        <div className={styles.inner}>
           <header className={styles.header}>
             <h1 id="auth-signup-title" className={styles.title}>
               회원가입
@@ -97,13 +99,16 @@ export function AuthSignup() {
             </Button>
           </div>
 
+          <div className={styles.divider} aria-hidden />
+
           <div className={styles.footer}>
+            <span className={styles.footerText}>이미 계정이 있으신가요?</span>
             <Link href="/auth/login" className={styles.loginLink}>
-              로그인 페이지로 이동
+              로그인
             </Link>
           </div>
-        </section>
-      </div>
+        </div>
+      </section>
     </main>
   );
 }
