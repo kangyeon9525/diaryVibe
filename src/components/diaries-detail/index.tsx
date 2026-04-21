@@ -1,56 +1,67 @@
-import Image from 'next/image';
-import { Fragment } from 'react';
+"use client";
 
-import { Button } from '@/commons/components/button';
-import { Input } from '@/commons/components/input';
+import Image from "next/image";
+import { Fragment } from "react";
+
+import { Button } from "@/commons/components/button";
+import { Input } from "@/commons/components/input";
 import {
-  Emotion,
   getEmotionColor,
   getEmotionLabel,
-} from '@/commons/constants/enum';
+  getEmotionImageSrc,
+} from "@/commons/constants/enum";
 
-import styles from './styles.module.css';
-
-const mockDiary = {
-  emotion: Emotion.Happy,
-  title: '이것은 타이틀 입니다.',
-  date: '2024. 07. 12',
-  content:
-    '내용이 들어갑니다'.repeat(45),
-};
+import { useDiaryBinding } from "./hooks/index.binding.hook";
+import styles from "./styles.module.css";
 
 const mockRetrospects = [
-  { id: 1, content: '3년이 지나고 다시 보니 이때가 그립다.', date: '2024. 09. 24' },
-  { id: 2, content: '3년이 지나고 다시 보니 이때가 그립다.', date: '2024. 09. 24' },
+  { id: 1, content: "3년이 지나고 다시 보니 이때가 그립다.", date: "2024. 09. 24" },
+  { id: 2, content: "3년이 지나고 다시 보니 이때가 그립다.", date: "2024. 09. 24" },
 ];
 
 export default function DiariesDetail() {
+  const { diary } = useDiaryBinding();
+
+  if (!diary) {
+    return (
+      <div className={styles.container} data-testid="diary-detail-container">
+        <div className={styles.gap64}></div>
+        <div data-testid="diary-detail-not-found">일기를 찾을 수 없습니다.</div>
+      </div>
+    );
+  }
   return (
-    <div className={styles.container}>
+    <div className={styles.container} data-testid="diary-detail-container">
       <div className={styles.gap64}></div>
 
       {/* detail-title */}
       <div className={styles.detailTitle}>
         <div className={styles.titleSection}>
-          <span className={styles.titleText}>{mockDiary.title}</span>
+          <span className={styles.titleText} data-testid="diary-detail-title">
+            {diary.title}
+          </span>
         </div>
         <div className={styles.emotionDateRow}>
           <div className={styles.emotionArea}>
             <Image
-              src={`/images/emotion-${mockDiary.emotion.toLowerCase()}-s.png`}
-              alt={getEmotionLabel(mockDiary.emotion)}
+              src={getEmotionImageSrc(diary.emotion, "s")}
+              alt={getEmotionLabel(diary.emotion)}
               width={32}
               height={32}
+              data-testid="diary-detail-emotion-image"
             />
             <span
               className={styles.emotionText}
-              style={{ color: getEmotionColor(mockDiary.emotion) }}
+              style={{ color: getEmotionColor(diary.emotion) }}
+              data-testid="diary-detail-emotion-text"
             >
-              {getEmotionLabel(mockDiary.emotion)}
+              {getEmotionLabel(diary.emotion)}
             </span>
           </div>
           <div className={styles.dateArea}>
-            <span className={styles.dateText}>{mockDiary.date}</span>
+            <span className={styles.dateText} data-testid="diary-detail-date">
+              {diary.formattedDate}
+            </span>
             <span className={styles.dateText}>작성</span>
           </div>
         </div>
@@ -62,7 +73,9 @@ export default function DiariesDetail() {
       <div className={styles.detailContent}>
         <div className={styles.contentArea}>
           <span className={styles.contentLabel}>내용</span>
-          <p className={styles.contentText}>{mockDiary.content}</p>
+          <p className={styles.contentText} data-testid="diary-detail-content">
+            {diary.content}
+          </p>
         </div>
         <div className={styles.copyRow}>
           <button className={styles.copyButton}>
