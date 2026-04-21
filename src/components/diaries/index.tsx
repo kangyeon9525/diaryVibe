@@ -81,7 +81,10 @@ export function Diaries() {
               data-testid={`diary-card-${diary.id}`}
               onClick={() => handleCardClick(diary.id)}
             >
-              <div className={styles.cardImage}>
+              <div
+                className={styles.cardImage}
+                data-testid={`diary-card-${diary.id}-image`}
+              >
                 <Image
                   src={`/images/${emotionConfig[diary.emotion].imageFileM.replace('.svg', '.png')}`}
                   alt={getEmotionLabel(diary.emotion)}

@@ -104,9 +104,12 @@ test.describe("Diaries 데이터 바인딩 기능", () => {
     const titleElement = page.getByTestId("diary-card-1-title");
 
     await expect(titleElement).toBeVisible();
+    await expect(titleElement).toHaveCSS("overflow", "hidden");
+    await expect(titleElement).toHaveCSS("text-overflow", "ellipsis");
+    await expect(titleElement).toHaveCSS("white-space", "nowrap");
 
     const titleBox = await titleElement.boundingBox();
-    expect(titleBox?.height).toBeLessThanOrEqual(30);
+    expect(titleBox?.height).toBeLessThanOrEqual(24);
   });
 
   test("날짜가 올바른 형식으로 표시되어야 한다", async ({ page }) => {
@@ -158,13 +161,11 @@ test.describe("Diaries 데이터 바인딩 기능", () => {
     await page.reload();
     await expect(page.getByTestId("diaries-page-loaded")).toBeVisible();
 
-    const card1 = page.getByTestId("diary-card-1");
-    const image1 = card1.locator("img");
+    const image1 = page.getByTestId("diary-card-1-image").locator("img");
     const src1 = await image1.getAttribute("src");
     expect(src1).toContain("emotion-happy-m");
 
-    const card2 = page.getByTestId("diary-card-2");
-    const image2 = card2.locator("img");
+    const image2 = page.getByTestId("diary-card-2-image").locator("img");
     const src2 = await image2.getAttribute("src");
     expect(src2).toContain("emotion-sad-m");
   });
