@@ -87,20 +87,22 @@ export function Diaries() {
               >
                 <div className={styles.cardImageTop}>
                   <button
+                    type="button"
                     className={styles.deleteButton}
+                    data-testid={`diary-card-${diary.id}-delete`}
                     onClick={(e) => e.stopPropagation()}
                     aria-label="일기 삭제"
                   >
                     <Image
                       src="/icons/close_outline_light_s.svg"
-                      alt="삭제"
+                      alt=""
                       width={36}
                       height={36}
                     />
                   </button>
                 </div>
                 <Image
-                  src={`/images/${emotionConfig[diary.emotion].imageFileM.replace('.svg', '.png')}`}
+                  src={`/images/${emotionConfig[diary.emotion].imageFileM.replace(".svg", ".png")}`}
                   alt={getEmotionLabel(diary.emotion)}
                   fill
                   className={styles.emotionImage}
@@ -115,14 +117,14 @@ export function Diaries() {
                   >
                     {getEmotionLabel(diary.emotion)}
                   </span>
-                  <span 
+                  <span
                     className={styles.date}
                     data-testid={`diary-card-${diary.id}-date`}
                   >
                     {diary.date}
                   </span>
                 </div>
-                <div 
+                <div
                   className={styles.cardTitle}
                   data-testid={`diary-card-${diary.id}-title`}
                 >

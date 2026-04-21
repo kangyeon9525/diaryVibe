@@ -1,6 +1,6 @@
 import { test, expect } from "@playwright/test";
 
-import { Emotion } from "@/commons/constants/enum";
+import { Emotion, getEmotionLabel } from "@/commons/constants/enum";
 import { staticPaths } from "@/commons/constants/url";
 
 test.describe("Diaries 데이터 바인딩 기능", () => {
@@ -161,11 +161,15 @@ test.describe("Diaries 데이터 바인딩 기능", () => {
     await page.reload();
     await expect(page.getByTestId("diaries-page-loaded")).toBeVisible();
 
-    const image1 = page.getByTestId("diary-card-1-image").locator("img");
+    const image1 = page
+      .getByTestId("diary-card-1-image")
+      .getByRole("img", { name: getEmotionLabel(Emotion.Happy) });
     const src1 = await image1.getAttribute("src");
     expect(src1).toContain("emotion-happy-m");
 
-    const image2 = page.getByTestId("diary-card-2-image").locator("img");
+    const image2 = page
+      .getByTestId("diary-card-2-image")
+      .getByRole("img", { name: getEmotionLabel(Emotion.Sad) });
     const src2 = await image2.getAttribute("src");
     expect(src2).toContain("emotion-sad-m");
   });
