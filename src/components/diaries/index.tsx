@@ -7,96 +7,14 @@ import { Searchbar } from "@/commons/components/searchbar";
 import { Button } from "@/commons/components/button";
 import { Pagination } from "@/commons/components/pagination";
 import {
-  Emotion,
   getEmotionLabel,
   getEmotionColor,
   emotionConfig,
 } from "@/commons/constants/enum";
 import { useDiariesLinkModal } from "./hooks/index.link.modal.hook";
 import { useDiariesLinkRouting } from "./hooks/index.link.routing.hook";
+import { useDiariesBinding } from "./hooks/index.binding.hook";
 import styles from "./styles.module.css";
-
-type DiaryCard = {
-  id: string;
-  emotion: Emotion;
-  date: string;
-  title: string;
-};
-
-const MOCK_DIARIES: DiaryCard[] = [
-  {
-    id: "1",
-    emotion: Emotion.Sad,
-    date: "2024. 03. 12",
-    title: "타이틀 영역 입니다. 한줄까지만 노출 됩니다.",
-  },
-  {
-    id: "2",
-    emotion: Emotion.Surprise,
-    date: "2024. 03. 12",
-    title: "타이틀 영역 입니다.",
-  },
-  {
-    id: "3",
-    emotion: Emotion.Angry,
-    date: "2024. 03. 12",
-    title: "타이틀 영역 입니다.",
-  },
-  {
-    id: "4",
-    emotion: Emotion.Happy,
-    date: "2024. 03. 12",
-    title: "타이틀 영역 입니다.",
-  },
-  {
-    id: "5",
-    emotion: Emotion.Etc,
-    date: "2024. 03. 12",
-    title: "타이틀 영역 입니다. 한줄까지만 노출 됩니다.",
-  },
-  {
-    id: "6",
-    emotion: Emotion.Surprise,
-    date: "2024. 03. 12",
-    title: "타이틀 영역 입니다.",
-  },
-  {
-    id: "7",
-    emotion: Emotion.Angry,
-    date: "2024. 03. 12",
-    title: "타이틀 영역 입니다.",
-  },
-  {
-    id: "8",
-    emotion: Emotion.Happy,
-    date: "2024. 03. 12",
-    title: "타이틀 영역 입니다.",
-  },
-  {
-    id: "9",
-    emotion: Emotion.Sad,
-    date: "2024. 03. 12",
-    title: "타이틀 영역 입니다. 한줄까지만 노출 됩니다.",
-  },
-  {
-    id: "10",
-    emotion: Emotion.Surprise,
-    date: "2024. 03. 12",
-    title: "타이틀 영역 입니다.",
-  },
-  {
-    id: "11",
-    emotion: Emotion.Angry,
-    date: "2024. 03. 12",
-    title: "타이틀 영역 입니다.",
-  },
-  {
-    id: "12",
-    emotion: Emotion.Happy,
-    date: "2024. 03. 12",
-    title: "타이틀 영역 입니다.",
-  },
-];
 
 export function Diaries() {
   const [filter, setFilter] = useState("all");
@@ -104,6 +22,7 @@ export function Diaries() {
   const totalPages = 5;
   const { openWriteDiaryModal } = useDiariesLinkModal();
   const { handleCardClick } = useDiariesLinkRouting();
+  const { diaries } = useDiariesBinding();
 
   const handleSearch = (value: string) => {
     console.log("검색:", value);
@@ -155,7 +74,7 @@ export function Diaries() {
       <div className={styles.gap42} aria-hidden />
       <div className={styles.main} aria-label="메인 영역">
         <div className={styles.diaryGrid}>
-          {MOCK_DIARIES.map((diary) => (
+          {diaries.map((diary) => (
             <div
               key={diary.id}
               className={styles.diaryCard}
@@ -175,12 +94,23 @@ export function Diaries() {
                   <span
                     className={styles.emotionLabel}
                     style={{ color: getEmotionColor(diary.emotion) }}
+                    data-testid={`diary-card-${diary.id}-emotion`}
                   >
                     {getEmotionLabel(diary.emotion)}
                   </span>
-                  <span className={styles.date}>{diary.date}</span>
+                  <span 
+                    className={styles.date}
+                    data-testid={`diary-card-${diary.id}-date`}
+                  >
+                    {diary.date}
+                  </span>
                 </div>
-                <div className={styles.cardTitle}>{diary.title}</div>
+                <div 
+                  className={styles.cardTitle}
+                  data-testid={`diary-card-${diary.id}-title`}
+                >
+                  {diary.title}
+                </div>
               </div>
             </div>
           ))}
