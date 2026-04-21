@@ -1,17 +1,26 @@
+"use client";
+
 import Link from "next/link";
 
 import { Button } from "@/commons/components/button";
 import { Input } from "@/commons/components/input";
+import { staticPaths } from "@/commons/constants/url";
 
+import { useAuthSignupForm } from "./hooks/index.form.hook";
 import styles from "./styles.module.css";
 
 export function AuthSignup() {
+  const { register, onSubmit, isValid, isSubmitBlocked } = useAuthSignupForm();
+
   return (
-    <main className={styles.page}>
+    <main
+      className={styles.page}
+      data-testid="auth-signup-page-loaded"
+    >
       <section className={styles.card} aria-labelledby="auth-signup-title">
         <div className={styles.accent} aria-hidden />
 
-        <div className={styles.inner}>
+        <form className={styles.inner} onSubmit={onSubmit} noValidate>
           <header className={styles.header}>
             <h1 id="auth-signup-title" className={styles.title}>
               회원가입
@@ -29,12 +38,13 @@ export function AuthSignup() {
               <Input
                 id="signup-email"
                 type="email"
-                name="email"
                 variant="primary"
                 theme="light"
                 className={styles.fieldWidth}
                 placeholder="you@example.com"
                 autoComplete="email"
+                data-testid="auth-signup-func-form-email"
+                {...register("email")}
               />
             </div>
 
@@ -45,12 +55,13 @@ export function AuthSignup() {
               <Input
                 id="signup-password"
                 type="password"
-                name="password"
                 variant="primary"
                 theme="light"
                 className={styles.fieldWidth}
                 placeholder="비밀번호를 입력해 주세요"
                 autoComplete="new-password"
+                data-testid="auth-signup-func-form-password"
+                {...register("password")}
               />
             </div>
 
@@ -61,12 +72,13 @@ export function AuthSignup() {
               <Input
                 id="signup-password-confirm"
                 type="password"
-                name="passwordConfirm"
                 variant="primary"
                 theme="light"
                 className={styles.fieldWidth}
                 placeholder="비밀번호를 다시 입력해 주세요"
                 autoComplete="new-password"
+                data-testid="auth-signup-func-form-password-confirm"
+                {...register("passwordConfirm")}
               />
             </div>
 
@@ -77,23 +89,26 @@ export function AuthSignup() {
               <Input
                 id="signup-name"
                 type="text"
-                name="name"
                 variant="primary"
                 theme="light"
                 className={styles.fieldWidth}
                 placeholder="이름을 입력해 주세요"
                 autoComplete="name"
+                data-testid="auth-signup-func-form-name"
+                {...register("name")}
               />
             </div>
           </div>
 
           <div className={styles.actions}>
             <Button
-              type="button"
+              type="submit"
               variant="primary"
               theme="light"
               size="large"
               className={styles.buttonWidth}
+              disabled={!isValid || isSubmitBlocked}
+              data-testid="auth-signup-func-form-submit"
             >
               회원가입
             </Button>
@@ -103,11 +118,11 @@ export function AuthSignup() {
 
           <div className={styles.footer}>
             <span className={styles.footerText}>이미 계정이 있으신가요?</span>
-            <Link href="/auth/login" className={styles.loginLink}>
+            <Link href={staticPaths.authLogin} className={styles.loginLink}>
               로그인
             </Link>
           </div>
-        </div>
+        </form>
       </section>
     </main>
   );
