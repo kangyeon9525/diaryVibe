@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import Selectbox from "@/commons/components/selectbox";
+import { Selectbox } from "@/commons/components/selectbox";
 import styles from "./styles.module.css";
 
 const FILTER_OPTIONS = [
