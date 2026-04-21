@@ -1,7 +1,7 @@
 "use client";
 
 import { useInfiniteQuery } from "@tanstack/react-query";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useRef } from "react";
 
 const DOG_BATCH_URL = "https://dog.ceo/api/breeds/image/random/6";
 
@@ -46,20 +46,28 @@ export function usePicturesBinding() {
       })),
     ) ?? [];
 
-  const [sentinelEl, setSentinelEl] = useState<HTMLDivElement | null>(null);
-
-  const { fetchNextPage, hasNextPage, isFetchingNextPage } = query;
+  const observerRef = useRef<IntersectionObserver | null>(null);
+  const infiniteScrollDepsRef = useRef({
+    fetchNextPage: query.fetchNextPage,
+    hasNextPage: query.hasNextPage,
+    isFetchingNextPage: query.isFetchingNextPage,
+  });
+  infiniteScrollDepsRef.current = {
+    fetchNextPage: query.fetchNextPage,
+    hasNextPage: query.hasNextPage,
+    isFetchingNextPage: query.isFetchingNextPage,
+  };
 
   const sentinelRefCallback = useCallback((node: HTMLDivElement | null) => {
-    setSentinelEl(node);
-  }, []);
-
-  useEffect(() => {
-    if (!sentinelEl) return;
+    observerRef.current?.disconnect();
+    observerRef.current = null;
+    if (!node) return;
 
     const observer = new IntersectionObserver(
       (entries) => {
         const [entry] = entries;
+        const { fetchNextPage, hasNextPage, isFetchingNextPage } =
+          infiniteScrollDepsRef.current;
         if (
           entry?.isIntersecting &&
           hasNextPage &&
@@ -75,16 +83,15 @@ export function usePicturesBinding() {
       },
     );
 
-    observer.observe(sentinelEl);
-    return () => observer.disconnect();
-  }, [fetchNextPage, hasNextPage, isFetchingNextPage, sentinelEl]);
+    observer.observe(node);
+    observerRef.current = observer;
+  }, []);
 
   return {
     imageEntries,
     sentinelRefCallback,
     isInitialPending: query.isPending,
     isInitialError: query.isError,
-    isFetchNextPageError: query.isFetchNextPageError,
-    isFetchingNextPage,
+    isFetchingNextPage: query.isFetchingNextPage,
   };
 }

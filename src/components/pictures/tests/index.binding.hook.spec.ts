@@ -10,12 +10,12 @@ test.describe("Pictures 강아지 사진 바인딩", () => {
         await page.goto(staticPaths.pictures);
         await expect(page.getByTestId("pictures-page-loaded")).toBeVisible();
         await expect(page.getByTestId("picture-dog-0")).toBeVisible({
-          timeout: 60_000,
+          timeout: 60000,
         });
       } finally {
         await page.close();
       }
-    }, { timeout: 120_000 });
+    }, { timeout: 120000 });
 
     test.beforeEach(async ({ page }) => {
       await page.goto(staticPaths.pictures);
