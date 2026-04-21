@@ -82,6 +82,27 @@
   object-fit: cover;
 }
 
+.cardImageTop {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  justify-content: flex-end;
+  padding: 4px 4px 0 0;
+}
+
+.deleteButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+}
+
 .cardContent {
   display: flex;
   flex-direction: column;

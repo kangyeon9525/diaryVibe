@@ -85,6 +85,20 @@ export function Diaries() {
                 className={styles.cardImage}
                 data-testid={`diary-card-${diary.id}-image`}
               >
+                <div className={styles.cardImageTop}>
+                  <button
+                    className={styles.deleteButton}
+                    onClick={(e) => e.stopPropagation()}
+                    aria-label="일기 삭제"
+                  >
+                    <Image
+                      src="/icons/close_outline_light_s.svg"
+                      alt="삭제"
+                      width={36}
+                      height={36}
+                    />
+                  </button>
+                </div>
                 <Image
                   src={`/images/${emotionConfig[diary.emotion].imageFileM.replace('.svg', '.png')}`}
                   alt={getEmotionLabel(diary.emotion)}
