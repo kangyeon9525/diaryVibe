@@ -13,6 +13,7 @@ import {
   emotionConfig,
 } from "@/commons/constants/enum";
 import { useDiariesLinkModal } from "./hooks/index.link.modal.hook";
+import { useDiariesLinkRouting } from "./hooks/index.link.routing.hook";
 import styles from "./styles.module.css";
 
 type DiaryCard = {
@@ -102,6 +103,7 @@ export function Diaries() {
   const [currentPage, setCurrentPage] = useState(1);
   const totalPages = 5;
   const { openWriteDiaryModal } = useDiariesLinkModal();
+  const { handleCardClick } = useDiariesLinkRouting();
 
   const handleSearch = (value: string) => {
     console.log("검색:", value);
@@ -154,7 +156,12 @@ export function Diaries() {
       <div className={styles.main} aria-label="메인 영역">
         <div className={styles.diaryGrid}>
           {MOCK_DIARIES.map((diary) => (
-            <div key={diary.id} className={styles.diaryCard}>
+            <div
+              key={diary.id}
+              className={styles.diaryCard}
+              data-testid={`diary-card-${diary.id}`}
+              onClick={() => handleCardClick(diary.id)}
+            >
               <div className={styles.cardImage}>
                 <Image
                   src={`/images/${emotionConfig[diary.emotion].imageFileM.replace('.svg', '.png')}`}

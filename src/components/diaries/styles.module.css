@@ -66,6 +66,7 @@
   background-color: var(--palette-gray-white);
   border-radius: 16px;
   overflow: hidden;
+  cursor: pointer;
 }
 
 .cardImage {
