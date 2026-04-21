@@ -46,7 +46,7 @@ test.describe("일기 카드 라우팅 기능", () => {
   test("일기 카드 전체 영역 클릭 시 해당 일기 상세 페이지로 이동한다", async ({
     page,
   }) => {
-    const firstCard = page.getByTestId(/^diary-card-/).first();
+    const firstCard = page.getByTestId(/^diary-card-\d+$/).first();
 
     const cardId = await firstCard.getAttribute("data-testid");
     const id = cardId?.replace("diary-card-", "");
@@ -60,7 +60,7 @@ test.describe("일기 카드 라우팅 기능", () => {
   test("일기 카드에 cursor: pointer 스타일이 적용되어 있다", async ({
     page,
   }) => {
-    const firstCard = page.getByTestId(/^diary-card-/).first();
+    const firstCard = page.getByTestId(/^diary-card-\d+$/).first();
 
     const cursor = await firstCard.evaluate((el) => {
       return window.getComputedStyle(el).cursor;
@@ -72,7 +72,7 @@ test.describe("일기 카드 라우팅 기능", () => {
   test("여러 일기 카드를 클릭하면 각각의 id에 맞는 상세 페이지로 이동한다", async ({
     page,
   }) => {
-    const cards = page.getByTestId(/^diary-card-/);
+    const cards = page.getByTestId(/^diary-card-\d+$/);
     const count = await cards.count();
 
     for (let i = 0; i < Math.min(count, 3); i++) {
