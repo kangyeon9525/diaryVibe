@@ -1,7 +1,7 @@
 "use client";
 
-import Image from "next/image";
 import { Selectbox } from "@/commons/components/selectbox";
+import { usePicturesBinding } from "./hooks/index.binding.hook";
 import styles from "./styles.module.css";
 
 const FILTER_OPTIONS = [
@@ -10,13 +10,17 @@ const FILTER_OPTIONS = [
   { value: "오래된순", label: "오래된순" },
 ];
 
-const MOCK_IMAGES = Array.from({ length: 10 }, (_, i) => ({
-  id: i + 1,
-  src: "/images/dog-1.jpg",
-  alt: `강아지 사진 ${i + 1}`,
-}));
+const SPLASH_KEYS = ["s0", "s1", "s2", "s3", "s4", "s5"];
 
 export function Pictures() {
+  const {
+    imageEntries,
+    sentinelRefCallback,
+    isInitialPending,
+    isInitialError,
+    isFetchingNextPage,
+  } = usePicturesBinding();
+
   return (
     <div className={styles.container} data-testid="pictures-page-loaded">
       <div className={styles.gap32} aria-hidden />
@@ -36,19 +40,60 @@ export function Pictures() {
       </div>
       <div className={styles.gap42} aria-hidden />
       <div className={styles.main} aria-label="메인 영역">
-        <div className={styles.photoList}>
-          {MOCK_IMAGES.map((img) => (
-            <div key={img.id} className={styles.photoItem}>
-              <Image
-                src={img.src}
-                alt={img.alt}
-                width={640}
-                height={640}
-                className={styles.photo}
+        {isInitialError ? (
+          <p className={styles.errorText} data-testid="pictures-fetch-error">
+            강아지 사진을 불러오지 못했습니다.
+          </p>
+        ) : null}
+
+        {isInitialPending ? (
+          <div className={styles.photoList} aria-busy="true" aria-label="로딩">
+            {SPLASH_KEYS.map((splashKey) => (
+              <div
+                key={splashKey}
+                className={styles.photoItem}
+                data-testid={`picture-splash-${splashKey}`}
+              >
+                <div className={styles.splashInner}>
+                  <div className={styles.splashBar} aria-hidden />
+                </div>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <div className={styles.photoList}>
+            {imageEntries.map((item, index) => (
+              <div
+                key={item.key}
+                className={styles.photoItem}
+                data-testid={`picture-dog-${index}`}
+              >
+                {/* eslint-disable-next-line @next/next/no-img-element -- dog.ceo 외부 URL, next.config 수정 없이 표시 */}
+                <img
+                  src={item.src}
+                  alt={`강아지 사진 ${index + 1}`}
+                  width={640}
+                  height={640}
+                  className={styles.photo}
+                  loading={index < 6 ? "eager" : "lazy"}
+                />
+              </div>
+            ))}
+            <div
+              ref={sentinelRefCallback}
+              className={styles.infiniteSentinel}
+              data-testid="pictures-infinite-sentinel"
+              aria-hidden
+            />
+            {isFetchingNextPage ? (
+              <div
+                className={styles.nextPageHint}
+                data-testid="pictures-fetching-next"
+                aria-hidden
               />
-            </div>
-          ))}
-        </div>
+            ) : null}
+          </div>
+        )}
       </div>
     </div>
   );
