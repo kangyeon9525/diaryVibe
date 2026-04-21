@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
 
 import { Button } from "@/commons/components/button";
 import { Input } from "@/commons/components/input";
@@ -12,6 +11,7 @@ import {
 } from "@/commons/constants/enum";
 
 import { useDiariesNewLinkModalClose } from "./hooks/index.link.modal.close.hook";
+import { useDiariesNewForm } from "./hooks/index.form.hook";
 import styles from "./styles.module.css";
 
 /** 피그마 Frame 61 라디오 순서(행복 → 슬픔 → 놀람 → 화남 → 기타) */
@@ -24,13 +24,12 @@ const EMOTION_RADIO_ORDER: EmotionType[] = [
 ];
 
 export function DiariesNew() {
-  const [emotion, setEmotion] = useState<EmotionType>(Emotion.Happy);
-  const [title, setTitle] = useState("");
-  const [content, setContent] = useState("");
   const { handleClose } = useDiariesNewLinkModalClose();
+  const { register, onSubmit, emotion, setEmotion, isValid } =
+    useDiariesNewForm();
 
   return (
-    <div className={styles.wrapper}>
+    <form className={styles.wrapper} onSubmit={onSubmit}>
       <header className={styles.header}>
         <h1 className={styles.headerTitle}>일기 쓰기</h1>
       </header>
@@ -76,8 +75,8 @@ export function DiariesNew() {
           theme="light"
           className={styles.inputFullWidth}
           placeholder="제목을 입력합니다."
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
+          data-testid="diaries-new-func-form-title"
+          {...register("title")}
         />
       </section>
 
@@ -88,9 +87,9 @@ export function DiariesNew() {
         <textarea
           className={styles.contentTextarea}
           placeholder="내용을 입력합니다."
-          value={content}
-          onChange={(e) => setContent(e.target.value)}
           rows={4}
+          data-testid="diaries-new-func-form-content"
+          {...register("content")}
         />
       </section>
 
@@ -109,16 +108,17 @@ export function DiariesNew() {
           닫기
         </Button>
         <Button
-          type="button"
+          type="submit"
           variant="primary"
           theme="light"
           size="large"
           className={styles.footerButton}
-          disabled
+          disabled={!isValid}
+          data-testid="diaries-new-func-form-submit"
         >
           등록하기
         </Button>
       </footer>
-    </div>
+    </form>
   );
 }
