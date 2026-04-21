@@ -7,9 +7,9 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation } from "@tanstack/react-query";
 import { z } from "zod";
 
+import { useModal } from "@/commons/providers/modal/modal.provider";
 import { Modal } from "@/commons/components/modal";
 import { staticPaths } from "@/commons/constants/url";
-import { useModal } from "@/commons/providers/modal/modal.provider";
 
 const GRAPHQL_ENDPOINT = "https://main-practice.codebootcamp.co.kr/graphql";
 
