@@ -89,7 +89,11 @@ test.describe("일기 카드 라우팅 기능", () => {
     }
   });
 
-  test.skip("삭제 아이콘 클릭 시에는 페이지 이동하지 않는다", async () => {
-    /* 프롬프트 조건 대비 — 삭제 아이콘 UI 미구현 시 검증 보류 */
+  test("삭제 아이콘 클릭 시에는 페이지 이동하지 않는다", async ({ page }) => {
+    const urlBefore = page.url();
+
+    await page.getByTestId("diary-card-1-delete").click();
+
+    await expect(page).toHaveURL(urlBefore);
   });
 });
