@@ -24,7 +24,7 @@ export const EMOTION_LIST = [
 type EmotionConfig = {
   /** 화면 표시용 한글 라벨 */
   label: string;
-  /** `public/icons` 기준 파일명 (경로 조합용) */
+  /** `public/images` 기준 파일명 (경로 조합용) */
   imageFileM: string;
   imageFileS: string;
   /** 피그마 팔레트 토큰 기준 60단계 색 */
@@ -34,39 +34,39 @@ type EmotionConfig = {
 export const emotionConfig: Record<Emotion, EmotionConfig> = {
   Happy: {
     label: '행복해요',
-    imageFileM: 'emotion-happy-m.svg',
-    imageFileS: 'emotion-happy-s.svg',
+    imageFileM: 'emotion-happy-m.png',
+    imageFileS: 'emotion-happy-s.png',
     color: palette.red['60'],
   },
   Sad: {
     label: '슬퍼요',
-    imageFileM: 'emotion-sad-m.svg',
-    imageFileS: 'emotion-sad-s.svg',
+    imageFileM: 'emotion-sad-m.png',
+    imageFileS: 'emotion-sad-s.png',
     color: palette.blue['60'],
   },
   Angry: {
     label: '화나요',
-    imageFileM: 'emotion-angry-m.svg',
-    imageFileS: 'emotion-angry-s.svg',
+    imageFileM: 'emotion-angry-m.png',
+    imageFileS: 'emotion-angry-s.png',
     color: palette.gray['60'],
   },
   Surprise: {
     label: '놀랐어요',
-    imageFileM: 'emotion-surprise-m.svg',
-    imageFileS: 'emotion-surprise-s.svg',
+    imageFileM: 'emotion-surprise-m.png',
+    imageFileS: 'emotion-surprise-s.png',
     color: palette.yellow['60'],
   },
   Etc: {
     label: '기타',
-    imageFileM: 'emotion-etc-m.svg',
-    imageFileS: 'emotion-etc-s.svg',
+    imageFileM: 'emotion-etc-m.png',
+    imageFileS: 'emotion-etc-s.png',
     color: palette.green['60'],
   },
 };
 
 export type EmotionImageSize = 'm' | 's';
 
-/** `public/icons` 기준 URL (Next.js `Image`·`img src`에 그대로 사용) */
+/** `public/images` 기준 URL (Next.js `Image`·`img src`에 그대로 사용) */
 export function getEmotionImageSrc(
   emotion: Emotion,
   size: EmotionImageSize,
@@ -75,7 +75,7 @@ export function getEmotionImageSrc(
     size === 'm'
       ? emotionConfig[emotion].imageFileM
       : emotionConfig[emotion].imageFileS;
-  return `/icons/${file}`;
+  return `/images/${file}`;
 }
 
 export function getEmotionLabel(emotion: Emotion): string {

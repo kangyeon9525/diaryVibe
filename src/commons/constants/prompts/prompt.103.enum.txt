@@ -12,7 +12,7 @@
 
 ==============================================
 
-핵심요구사항) 해당 프로젝트에서 감정(emotion) 이란 enum 데이터를 사용 가능하도록 셋팅할 것.
+기존히스토리-참고만) 해당 프로젝트에서 감정(emotion) 이란 enum 데이터를 사용 가능하도록 셋팅할 것.
             - Happy:
                 1) "행복해요" 라는 단어로 화면에서 보여질 것.
                 2) 이미지는 emotion-happy-m.svg, emotion-happy-s.svg 로 화면에서 보여질 것.
@@ -38,3 +38,9 @@
                 2) 이미지는 emotion-etc-m.svg, emotion-etc-s.svg 로 화면에서 보여질 것.
                 3) 색상은 green60 으로 화면에서 보여질 것.
 
+
+==============================================
+
+핵심 요구사항)
+Happy, Sad, Angry, Surprise, Etc 이미지는 
+/public/images/emotion-*.png로 변경할 것
