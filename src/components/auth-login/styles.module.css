@@ -1,0 +1,144 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 100vh;
+  padding: 32px 16px;
+  background: var(--color-background);
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 420px;
+  border-radius: 20px;
+  overflow: hidden;
+  background: var(--color-surface);
+  box-shadow:
+    0 1px 3px rgba(0, 0, 0, 0.06),
+    0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+.accent {
+  flex-shrink: 0;
+  width: 100%;
+  height: 4px;
+  background: var(--gradient-primary);
+}
+
+.inner {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  padding: 36px 32px 32px;
+  gap: 28px;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+}
+
+.title {
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-sans);
+  font-size: var(--typo-headline-02-font-size);
+  line-height: var(--typo-headline-02-line-height);
+  font-weight: var(--typo-headline-02-font-weight);
+  letter-spacing: var(--typo-headline-02-letter-spacing);
+  color: var(--color-foreground);
+}
+
+.subtitle {
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-sans);
+  font-size: var(--typo-body-02-m-font-size);
+  line-height: var(--typo-body-02-m-line-height);
+  font-weight: var(--typo-body-02-m-font-weight);
+  letter-spacing: var(--typo-body-02-m-letter-spacing);
+  color: var(--color-muted);
+}
+
+.fields {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.fieldBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.label {
+  font-family: var(--font-sans);
+  font-size: var(--typo-title-03-font-size);
+  line-height: var(--typo-title-03-line-height);
+  font-weight: var(--typo-title-03-font-weight);
+  letter-spacing: var(--typo-title-03-letter-spacing);
+  color: var(--palette-gray-80);
+}
+
+.fieldWidth {
+  width: 100%;
+}
+
+.actions {
+  display: flex;
+  flex-direction: column;
+}
+
+.buttonWidth {
+  width: 100%;
+}
+
+.divider {
+  flex-shrink: 0;
+  width: 100%;
+  height: 1px;
+  background: var(--color-border);
+}
+
+.footer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding-top: 4px;
+}
+
+.footerText {
+  font-family: var(--font-sans);
+  font-size: var(--typo-body-02-m-font-size);
+  line-height: var(--typo-body-02-m-line-height);
+  font-weight: var(--typo-body-02-m-font-weight);
+  letter-spacing: var(--typo-body-02-m-letter-spacing);
+  color: var(--color-muted);
+}
+
+.signupLink {
+  font-family: var(--font-sans);
+  font-size: var(--typo-body-02-m-font-size);
+  line-height: var(--typo-body-02-m-line-height);
+  font-weight: var(--typo-title-03-font-weight);
+  letter-spacing: var(--typo-body-02-m-letter-spacing);
+  color: var(--color-primary);
+  text-decoration: none;
+}
+
+.signupLink:hover {
+  color: var(--color-primary-hover);
+  text-decoration: underline;
+}
