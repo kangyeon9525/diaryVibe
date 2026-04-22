@@ -4,6 +4,9 @@ import Image from "next/image";
 import Link from "next/link";
 import type { ReactNode } from "react";
 
+import { Button } from "@/commons/components/button";
+import { useAuth } from "@/commons/providers/auth/auth.provider";
+
 import { useCommonsLayoutArea } from "./hooks/index.area.hook";
 import { useCommonsLayoutLinkRouting } from "./hooks/index.link.routing.hook";
 
@@ -30,6 +33,8 @@ export function CommonsLayout({ children }: CommonsLayoutProps) {
     showFooter,
   } = useCommonsLayoutArea();
 
+  const { isLoggedIn, user } = useAuth();
+
   return (
     <div
       className={styles.container}
@@ -42,14 +47,35 @@ export function CommonsLayout({ children }: CommonsLayoutProps) {
             aria-label="헤더 영역"
             data-testid="layout-area-header"
           >
-            {showHeaderLogo ? (
-              <Link
-                href={diariesHref}
-                className={styles.headerLogo}
-                data-testid="layout-header-logo-link"
+            <div className={styles.headerLeft}>
+              {showHeaderLogo ? (
+                <Link
+                  href={diariesHref}
+                  className={styles.headerLogo}
+                  data-testid="layout-header-logo-link"
+                >
+                  민지의 다이어리
+                </Link>
+              ) : null}
+            </div>
+            {isLoggedIn ? (
+              <div
+                className={styles.headerAuth}
+                data-testid="layout-header-auth-status"
               >
-                민지의 다이어리
-              </Link>
+                <span className={styles.headerUserName}>
+                  {user?.name ?? "회원"}
+                </span>
+                <Button
+                  variant="secondary"
+                  theme="light"
+                  size="medium"
+                  className={styles.logoutButton}
+                  data-testid="layout-header-logout-button"
+                >
+                  로그아웃
+                </Button>
+              </div>
             ) : null}
           </header>
           <div className={styles.gap} aria-hidden />

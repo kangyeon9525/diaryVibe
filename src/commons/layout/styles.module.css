@@ -20,8 +20,39 @@
 .header {
   height: 60px;
   display: flex;
+  flex-direction: row;
   align-items: center;
-  justify-content: space-between;
+  gap: 16px;
+}
+
+.headerLeft {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.headerAuth {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex-shrink: 0;
+  gap: 16px;
+  margin-left: auto;
+}
+
+.headerUserName {
+  font-family: var(--font-sans);
+  font-size: var(--typo-title-02-font-size);
+  line-height: var(--typo-title-02-line-height);
+  font-weight: var(--typo-title-02-font-weight);
+  letter-spacing: var(--typo-title-02-letter-spacing);
+  color: var(--palette-gray-black);
+}
+
+.logoutButton {
+  width: 92px;
 }
 
 .headerLogo {
