@@ -6,9 +6,12 @@ import { Button } from "@/commons/components/button";
 import { Input } from "@/commons/components/input";
 import { staticPaths } from "@/commons/constants/url";
 
+import { useAuthLoginForm } from "./hooks/index.form.hook";
 import styles from "./styles.module.css";
 
 export function AuthLogin() {
+  const { register, onSubmit, isValid, isSubmitBlocked } = useAuthLoginForm();
+
   return (
     <main
       className={styles.page}
@@ -17,13 +20,7 @@ export function AuthLogin() {
       <section className={styles.card} aria-labelledby="auth-login-title">
         <div className={styles.accent} aria-hidden />
 
-        <form
-          className={styles.inner}
-          noValidate
-          onSubmit={(e) => {
-            e.preventDefault();
-          }}
-        >
+        <form className={styles.inner} onSubmit={onSubmit} noValidate>
           <header className={styles.header}>
             <h1 id="auth-login-title" className={styles.title}>
               로그인
@@ -46,7 +43,8 @@ export function AuthLogin() {
                 className={styles.fieldWidth}
                 placeholder="you@example.com"
                 autoComplete="email"
-                name="email"
+                data-testid="auth-login-func-form-email"
+                {...register("email")}
               />
             </div>
 
@@ -62,7 +60,8 @@ export function AuthLogin() {
                 className={styles.fieldWidth}
                 placeholder="비밀번호를 입력해 주세요"
                 autoComplete="current-password"
-                name="password"
+                data-testid="auth-login-func-form-password"
+                {...register("password")}
               />
             </div>
           </div>
@@ -74,6 +73,8 @@ export function AuthLogin() {
               theme="light"
               size="large"
               className={styles.buttonWidth}
+              disabled={!isValid || isSubmitBlocked}
+              data-testid="auth-login-func-form-submit"
             >
               로그인
             </Button>
