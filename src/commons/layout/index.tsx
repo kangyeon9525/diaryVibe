@@ -5,9 +5,9 @@ import Link from "next/link";
 import type { ReactNode } from "react";
 
 import { Button } from "@/commons/components/button";
-import { useAuth } from "@/commons/providers/auth/auth.provider";
 
 import { useCommonsLayoutArea } from "./hooks/index.area.hook";
+import { useCommonsLayoutAuth } from "./hooks/index.auth.hook";
 import { useCommonsLayoutLinkRouting } from "./hooks/index.link.routing.hook";
 
 import styles from "./styles.module.css";
@@ -33,7 +33,8 @@ export function CommonsLayout({ children }: CommonsLayoutProps) {
     showFooter,
   } = useCommonsLayoutArea();
 
-  const { isLoggedIn, user } = useAuth();
+  const { isLoggedIn, displayName, onPressLogin, onPressLogout } =
+    useCommonsLayoutAuth();
 
   return (
     <div
@@ -63,20 +64,42 @@ export function CommonsLayout({ children }: CommonsLayoutProps) {
                 className={styles.headerAuth}
                 data-testid="layout-header-auth-status"
               >
-                <span className={styles.headerUserName}>
-                  {user?.name ?? "회원"}
+                <span
+                  className={styles.headerUserName}
+                  data-testid="layout-header-user-name"
+                >
+                  {displayName}
                 </span>
                 <Button
                   variant="secondary"
                   theme="light"
                   size="medium"
+                  type="button"
                   className={styles.logoutButton}
                   data-testid="layout-header-logout-button"
+                  onClick={onPressLogout}
                 >
                   로그아웃
                 </Button>
               </div>
-            ) : null}
+            ) : (
+              <div
+                className={styles.headerAuth}
+                data-testid="layout-header-auth-guest"
+              >
+                <Button
+                  variant="secondary"
+                  theme="light"
+                  size="medium"
+                  type="button"
+                  className={styles.loginButton}
+                  data-testid="layout-header-login-button"
+                  onClick={onPressLogin}
+                >
+                  로그인
+                </Button>
+              </div>
+            )}
           </header>
           <div className={styles.gap} aria-hidden />
         </>
