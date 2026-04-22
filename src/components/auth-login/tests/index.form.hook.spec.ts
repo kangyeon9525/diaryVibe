@@ -82,6 +82,20 @@ test.describe("auth-login 로그인 폼", () => {
     expect(userJson.data?.fetchUserLoggedIn?._id).toEqual(expect.any(String));
     expect(userJson.data?.fetchUserLoggedIn?.name).toEqual(expect.any(String));
 
+    const storedAccessToken = await page.evaluate(() =>
+      window.localStorage.getItem("accessToken"),
+    );
+    const storedUserRaw = await page.evaluate(() =>
+      window.localStorage.getItem("user"),
+    );
+    expect(storedAccessToken).toEqual(loginJson.data?.loginUser?.accessToken);
+    const storedUser = JSON.parse(storedUserRaw ?? "null") as {
+      _id?: string;
+      name?: string;
+    };
+    expect(storedUser._id).toEqual(userJson.data?.fetchUserLoggedIn?._id);
+    expect(storedUser.name).toEqual(userJson.data?.fetchUserLoggedIn?.name);
+
     await expect(
       page.getByTestId("auth-login-func-form-success-modal"),
     ).toBeVisible();
@@ -125,5 +139,12 @@ test.describe("auth-login 로그인 폼", () => {
     ).toBeVisible({
       timeout: 1999,
     });
+
+    await page
+      .getByTestId("auth-login-func-form-failure-modal")
+      .getByRole("button", { name: "확인" })
+      .click();
+
+    await expect(page.getByRole("dialog")).toHaveCount(0);
   });
 });
