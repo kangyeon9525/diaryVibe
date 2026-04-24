@@ -20,19 +20,20 @@ import { useDiariesDelete } from "./hooks/index.delete.hook";
 import styles from "./styles.module.css";
 
 export function Diaries() {
-  const [isSearchNarrow, setIsSearchNarrow] = useState(false);
+  const [isNarrowViewport, setIsNarrowViewport] = useState(false);
 
   useEffect(() => {
     const media = window.matchMedia("(max-width: 767px)");
     const apply = () => {
-      setIsSearchNarrow(media.matches);
+      setIsNarrowViewport(media.matches);
     };
     apply();
     media.addEventListener("change", apply);
     return () => media.removeEventListener("change", apply);
   }, []);
 
-  const searchSize = isSearchNarrow ? "medium" : "large";
+  const searchSize = isNarrowViewport ? "medium" : "large";
+  const deleteIconPx = isNarrowViewport ? 20 : 36;
 
   const { openWriteDiaryModal } = useDiariesLinkModal();
   const { handleCardClick } = useDiariesLinkRouting();
@@ -135,8 +136,8 @@ export function Diaries() {
                       <Image
                         src="/icons/close_outline_light_s.svg"
                         alt=""
-                        width={36}
-                        height={36}
+                        width={deleteIconPx}
+                        height={deleteIconPx}
                       />
                     </button>
                   )}

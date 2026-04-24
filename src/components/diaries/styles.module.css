@@ -21,7 +21,7 @@
   box-sizing: border-box;
 }
 
-/* search: 데스크톱 1행(필터 140 + 검색 + 일기쓰기 110) / 767px 이하 1행(필터 120+버튼) + 2행(검색) — flexbox만, 노드 3:4100 대응 */
+/* search: 데스크톱 1행(필터 140 + 검색 + 일기쓰기 110) / 767px 이하 피그마 3:4100 — 1행 검색 전체, 2행 드롭다운 102 + space-between + 일기쓰기 103 */
 .searchInner {
   display: flex;
   flex-direction: row;
@@ -75,30 +75,32 @@
 
 @media (max-width: 767px) {
   .search {
-    min-height: 112px;
+    min-height: 96px;
   }
 
   .searchInner {
     flex-wrap: wrap;
-  }
-
-  .filterSelectbox {
-    width: 120px;
-    min-width: 120px;
-    order: 1;
-  }
-
-  .writeButton {
-    order: 2;
-    flex: 1 1 0;
-    width: auto;
-    min-width: 0;
+    column-gap: 0;
+    justify-content: space-between;
   }
 
   .searchbar {
-    order: 3;
+    order: 1;
     flex: 1 1 100%;
     min-width: 0;
+  }
+
+  .filterSelectbox {
+    order: 2;
+    width: 102px;
+    min-width: 102px;
+  }
+
+  .writeButton {
+    order: 3;
+    width: 103px;
+    min-width: 103px;
+    flex-shrink: 0;
   }
 }
 
@@ -115,6 +117,13 @@
   box-sizing: border-box;
 }
 
+/* 모바일(≤767px): 피그마 main 노드 3:4226 — 콘텐츠 폭 320, 좌우 20, 카드 152×192, gap 16×24 */
+@media (max-width: 767px) {
+  .main {
+    padding: 0 20px;
+  }
+}
+
 .diaryGrid {
   display: grid;
   grid-template-columns: repeat(auto-fill, 274px);
@@ -122,6 +131,18 @@
   gap: 24px;
   width: 100%;
   box-sizing: border-box;
+}
+
+@media (max-width: 767px) {
+  .diaryGrid {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    justify-content: flex-start;
+    column-gap: 16px;
+    row-gap: 24px;
+  }
 }
 
 .diaryCard {
@@ -136,6 +157,16 @@
   cursor: pointer;
 }
 
+@media (max-width: 767px) {
+  .diaryCard {
+    flex: 0 0 calc((100% - 16px) / 2);
+    width: calc((100% - 16px) / 2);
+    max-width: 152px;
+    min-width: 0;
+    height: 192px;
+  }
+}
+
 .cardImage {
   position: relative;
   width: 274px;
@@ -143,6 +174,15 @@
   flex-shrink: 0;
   border-radius: 16px;
   overflow: hidden;
+}
+
+@media (max-width: 767px) {
+  .cardImage {
+    width: 100%;
+    height: 116px;
+    margin-bottom: 16px;
+    border-radius: 16px;
+  }
 }
 
 .emotionImage {
@@ -155,6 +195,12 @@
   display: flex;
   justify-content: flex-end;
   padding: 4px 4px 0 0;
+}
+
+@media (max-width: 767px) {
+  .cardImageTop {
+    padding: 2px 2px 0 0;
+  }
 }
 
 .deleteButton {
@@ -170,6 +216,13 @@
   flex-shrink: 0;
 }
 
+@media (max-width: 767px) {
+  .deleteButton {
+    width: 20px;
+    height: 20px;
+  }
+}
+
 .cardContent {
   display: flex;
   flex-direction: column;
@@ -177,6 +230,17 @@
   padding: 8px;
   width: 274px;
   flex-shrink: 0;
+}
+
+@media (max-width: 767px) {
+  .cardContent {
+    width: 100%;
+    flex: 1 1 0;
+    min-height: 0;
+    padding: 0 8px 16px 8px;
+    gap: 4px;
+    box-sizing: border-box;
+  }
 }
 
 .cardHeader {
@@ -187,12 +251,27 @@
   height: 24px;
 }
 
+@media (max-width: 767px) {
+  .cardHeader {
+    height: 16px;
+  }
+}
+
 .emotionLabel {
   font-family: var(--font-sans);
   font-size: var(--typo-sub-title-01-font-size);
   line-height: var(--typo-sub-title-01-line-height);
   font-weight: var(--typo-sub-title-01-font-weight);
   letter-spacing: var(--typo-sub-title-01-letter-spacing);
+}
+
+@media (max-width: 767px) {
+  .emotionLabel {
+    font-size: var(--typo-sub-title-02-font-size);
+    line-height: 16px;
+    font-weight: var(--typo-sub-title-02-font-weight);
+    letter-spacing: -0.12px;
+  }
 }
 
 .date {
@@ -202,6 +281,15 @@
   font-weight: var(--typo-body-02-s-font-weight);
   letter-spacing: var(--typo-body-02-s-letter-spacing);
   color: var(--palette-gray-50);
+}
+
+@media (max-width: 767px) {
+  .date {
+    font-size: var(--typo-body-03-regular-font-size);
+    line-height: 16px;
+    font-weight: var(--typo-body-03-regular-font-weight);
+    letter-spacing: -0.12px;
+  }
 }
 
 .cardTitle {
@@ -216,6 +304,16 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+@media (max-width: 767px) {
+  .cardTitle {
+    height: 24px;
+    font-size: var(--typo-title-03-font-size);
+    line-height: 24px;
+    font-weight: var(--typo-title-03-font-weight);
+    letter-spacing: var(--typo-title-03-letter-spacing);
+  }
 }
 
 .gap40 {
