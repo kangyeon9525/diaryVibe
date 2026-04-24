@@ -189,6 +189,92 @@
   gap: 16px;
 }
 
+.footerDesktopOnly {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  width: 100%;
+  min-height: 0;
+  gap: 16px;
+}
+
+.footerMobileOnly {
+  display: none;
+}
+
 .footerButton {
   width: 104px;
+}
+
+/* ── 반응형: viewport width 767px 이하 (일기쓰기 모달 전체, 피그마 3:4670) ── */
+@media (max-width: 767px) {
+  .wrapper {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    min-width: 0;
+    /* 콘텐츠 폭 272px(320-48) */
+    padding: 24px 24px 0 24px;
+  }
+
+  /* 섹션 간 24 (피그마 Frame 69) */
+  .gap40 {
+    height: 24px;
+  }
+
+  .emotionBox {
+    height: auto;
+    min-height: 204px;
+  }
+
+  .emotionRadios {
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: flex-start;
+    justify-content: flex-start;
+    height: auto;
+    min-height: 168px;
+    gap: 12px;
+  }
+
+  .inputTitle {
+    height: auto;
+    min-height: 64px;
+  }
+
+  .inputContent {
+    height: auto;
+    min-height: 152px;
+  }
+
+  .footer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    height: auto;
+    min-height: 40px;
+    gap: 16px;
+  }
+
+  .footerDesktopOnly {
+    display: none;
+  }
+
+  .footerMobileOnly {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: 40px;
+    gap: 16px;
+  }
+
+  .footerButtonNarrow {
+    width: 80px;
+  }
 }

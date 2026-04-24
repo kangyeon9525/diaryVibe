@@ -3,6 +3,7 @@
 import type { CSSProperties } from "react";
 
 import { Selectbox } from "@/commons/components/selectbox";
+import { PictureFilterLayout } from "@/commons/constants/enum";
 import { usePicturesBinding } from "./hooks/index.binding.hook";
 import { usePicturesFilter } from "./hooks/index.filter.hook";
 import styles from "./styles.module.css";
@@ -25,6 +26,13 @@ export function Pictures() {
     "--pictures-photo-w": `${dimensions.width}px`,
     "--pictures-photo-h": `${dimensions.height}px`,
   } as CSSProperties;
+
+  const photoListLayoutClass =
+    layout === PictureFilterLayout.Default
+      ? styles.photoListLayoutDefault
+      : layout === PictureFilterLayout.Landscape
+        ? styles.photoListLayoutLandscape
+        : styles.photoListLayoutPortrait;
 
   return (
     <div className={styles.container} data-testid="pictures-page-loaded">
@@ -56,56 +64,59 @@ export function Pictures() {
         ) : null}
 
         {isInitialPending ? (
-          <div
-            className={styles.photoList}
-            style={photoListSizeStyle}
-            aria-busy="true"
-            aria-label="로딩"
-          >
-            {SPLASH_KEYS.map((splashKey) => (
-              <div
-                key={splashKey}
-                className={styles.photoItem}
-                data-testid={`picture-splash-${splashKey}`}
-              >
-                <div className={styles.splashInner}>
-                  <div className={styles.splashBar} aria-hidden />
+          <div className={styles.photoListVars} style={photoListSizeStyle}>
+            <div
+              className={`${styles.photoList} ${photoListLayoutClass}`}
+              aria-busy="true"
+              aria-label="로딩"
+            >
+              {SPLASH_KEYS.map((splashKey) => (
+                <div
+                  key={splashKey}
+                  className={styles.photoItem}
+                  data-testid={`picture-splash-${splashKey}`}
+                >
+                  <div className={styles.splashInner}>
+                    <div className={styles.splashBar} aria-hidden />
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         ) : (
-          <div className={styles.photoList} style={photoListSizeStyle}>
-            {imageEntries.map((item, index) => (
+          <div className={styles.photoListVars} style={photoListSizeStyle}>
+            <div className={`${styles.photoList} ${photoListLayoutClass}`}>
+              {imageEntries.map((item, index) => (
+                <div
+                  key={item.key}
+                  className={styles.photoItem}
+                  data-testid={`picture-dog-${index}`}
+                >
+                  {/* eslint-disable-next-line @next/next/no-img-element -- dog.ceo 외부 URL, next.config 수정 없이 표시 */}
+                  <img
+                    src={item.src}
+                    alt={`강아지 사진 ${index + 1}`}
+                    width={dimensions.width}
+                    height={dimensions.height}
+                    className={styles.photo}
+                    loading={index < 6 ? "eager" : "lazy"}
+                  />
+                </div>
+              ))}
               <div
-                key={item.key}
-                className={styles.photoItem}
-                data-testid={`picture-dog-${index}`}
-              >
-                {/* eslint-disable-next-line @next/next/no-img-element -- dog.ceo 외부 URL, next.config 수정 없이 표시 */}
-                <img
-                  src={item.src}
-                  alt={`강아지 사진 ${index + 1}`}
-                  width={dimensions.width}
-                  height={dimensions.height}
-                  className={styles.photo}
-                  loading={index < 6 ? "eager" : "lazy"}
-                />
-              </div>
-            ))}
-            <div
-              ref={sentinelRefCallback}
-              className={styles.infiniteSentinel}
-              data-testid="pictures-infinite-sentinel"
-              aria-hidden
-            />
-            {isFetchingNextPage ? (
-              <div
-                className={styles.nextPageHint}
-                data-testid="pictures-fetching-next"
+                ref={sentinelRefCallback}
+                className={styles.infiniteSentinel}
+                data-testid="pictures-infinite-sentinel"
                 aria-hidden
               />
-            ) : null}
+              {isFetchingNextPage ? (
+                <div
+                  className={styles.nextPageHint}
+                  data-testid="pictures-fetching-next"
+                  aria-hidden
+                />
+              ) : null}
+            </div>
           </div>
         )}
       </div>

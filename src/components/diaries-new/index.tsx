@@ -96,28 +96,52 @@ export function DiariesNew() {
       <div className={styles.gap40} aria-hidden />
 
       <footer className={styles.footer}>
-        <Button
-          type="button"
-          variant="secondary"
-          theme="light"
-          size="large"
-          className={styles.footerButton}
-          data-testid="diaries-new-func-link-modal-close"
-          onClick={handleClose}
-        >
-          닫기
-        </Button>
-        <Button
-          type="submit"
-          variant="primary"
-          theme="light"
-          size="large"
-          className={styles.footerButton}
-          disabled={!isValid}
-          data-testid="diaries-new-func-form-submit"
-        >
-          등록하기
-        </Button>
+        <div className={styles.footerDesktopOnly}>
+          <Button
+            type="button"
+            variant="secondary"
+            theme="light"
+            size="large"
+            className={styles.footerButton}
+            data-testid="diaries-new-func-link-modal-close"
+            onClick={handleClose}
+          >
+            닫기
+          </Button>
+          <Button
+            type="submit"
+            variant="primary"
+            theme="light"
+            size="large"
+            className={styles.footerButton}
+            disabled={!isValid}
+            data-testid="diaries-new-func-form-submit"
+          >
+            등록하기
+          </Button>
+        </div>
+        <div className={styles.footerMobileOnly}>
+          <Button
+            type="button"
+            variant="secondary"
+            theme="light"
+            size="medium"
+            className={styles.footerButtonNarrow}
+            onClick={handleClose}
+          >
+            닫기
+          </Button>
+          <Button
+            type="submit"
+            variant="primary"
+            theme="light"
+            size="medium"
+            className={styles.footerButtonNarrow}
+            disabled={!isValid}
+          >
+            등록하기
+          </Button>
+        </div>
       </footer>
     </form>
   );
