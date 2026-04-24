@@ -12,15 +12,12 @@ import {
 } from "@/commons/constants/enum";
 
 import { useDiaryBinding } from "./hooks/index.binding.hook";
+import { useRetrospectForm } from "./hooks/index.retrospect.form.hook";
 import styles from "./styles.module.css";
-
-const mockRetrospects = [
-  { id: 1, content: "3년이 지나고 다시 보니 이때가 그립다.", date: "2024. 09. 24" },
-  { id: 2, content: "3년이 지나고 다시 보니 이때가 그립다.", date: "2024. 09. 24" },
-];
 
 export default function DiariesDetail() {
   const { diary } = useDiaryBinding();
+  const retrospectForm = useRetrospectForm(diary?.id ?? 0);
 
   if (!diary) {
     return (
@@ -105,7 +102,11 @@ export default function DiariesDetail() {
       <div className={styles.gap24}></div>
 
       {/* retrospect-input */}
-      <div className={styles.retrospectInput}>
+      <form
+        className={styles.retrospectInput}
+        onSubmit={retrospectForm.onSubmit}
+        noValidate
+      >
         <span className={styles.retrospectLabel}>회고</span>
         <div className={styles.retrospectInputRow}>
           <div className={styles.retrospectInputWrapper}>
@@ -113,29 +114,36 @@ export default function DiariesDetail() {
               variant="primary"
               theme="light"
               placeholder="회고를 남겨보세요."
+              data-testid="diary-detail-retrospect-func-form-content"
+              {...retrospectForm.register("content")}
             />
           </div>
           <Button
+            type="submit"
             variant="primary"
             size="large"
             theme="light"
             className={styles.submitButton}
+            disabled={retrospectForm.isSubmitDisabled}
+            data-testid="diary-detail-retrospect-func-form-submit"
           >
             입력
           </Button>
         </div>
-      </div>
+      </form>
 
       <div className={styles.gap16}></div>
 
       {/* retrospect-list */}
       <div className={styles.retrospectList}>
-        {mockRetrospects.map((item, index) => (
+        {retrospectForm.retrospects.map((item, index) => (
           <Fragment key={item.id}>
             {index > 0 && <hr className={styles.retrospectDivider} />}
             <div className={styles.retrospectItem}>
               <span className={styles.retrospectText}>{item.content}</span>
-              <span className={styles.retrospectDate}>[{item.date}]</span>
+              <span className={styles.retrospectDate}>
+                [{item.displayDate}]
+              </span>
             </div>
           </Fragment>
         ))}

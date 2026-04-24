@@ -1,14 +1,11 @@
 "use client";
 
+import type { CSSProperties } from "react";
+
 import { Selectbox } from "@/commons/components/selectbox";
 import { usePicturesBinding } from "./hooks/index.binding.hook";
+import { usePicturesFilter } from "./hooks/index.filter.hook";
 import styles from "./styles.module.css";
-
-const FILTER_OPTIONS = [
-  { value: "기본", label: "기본" },
-  { value: "최신순", label: "최신순" },
-  { value: "오래된순", label: "오래된순" },
-];
 
 const SPLASH_KEYS = ["s0", "s1", "s2", "s3", "s4", "s5"];
 
@@ -21,22 +18,34 @@ export function Pictures() {
     isFetchingNextPage,
   } = usePicturesBinding();
 
+  const { layout, dimensions, layoutOptions, handleLayoutChange } =
+    usePicturesFilter();
+
+  const photoListSizeStyle = {
+    "--pictures-photo-w": `${dimensions.width}px`,
+    "--pictures-photo-h": `${dimensions.height}px`,
+  } as CSSProperties;
+
   return (
     <div className={styles.container} data-testid="pictures-page-loaded">
       <div className={styles.gap32} aria-hidden />
       <div className={styles.filter} aria-label="필터 영역">
-        <Selectbox
-          variant="primary"
-          theme="light"
-          size="medium"
-          className={styles.filterSelect}
-        >
-          {FILTER_OPTIONS.map((opt) => (
-            <option key={opt.value} value={opt.value}>
-              {opt.label}
-            </option>
-          ))}
-        </Selectbox>
+        <div data-testid="picture-filter-select">
+          <Selectbox
+            variant="primary"
+            theme="light"
+            size="medium"
+            className={styles.filterSelect}
+            value={layout}
+            onChange={handleLayoutChange}
+          >
+            {layoutOptions.map((opt) => (
+              <option key={opt.value} value={opt.value}>
+                {opt.label}
+              </option>
+            ))}
+          </Selectbox>
+        </div>
       </div>
       <div className={styles.gap42} aria-hidden />
       <div className={styles.main} aria-label="메인 영역">
@@ -47,7 +56,12 @@ export function Pictures() {
         ) : null}
 
         {isInitialPending ? (
-          <div className={styles.photoList} aria-busy="true" aria-label="로딩">
+          <div
+            className={styles.photoList}
+            style={photoListSizeStyle}
+            aria-busy="true"
+            aria-label="로딩"
+          >
             {SPLASH_KEYS.map((splashKey) => (
               <div
                 key={splashKey}
@@ -61,7 +75,7 @@ export function Pictures() {
             ))}
           </div>
         ) : (
-          <div className={styles.photoList}>
+          <div className={styles.photoList} style={photoListSizeStyle}>
             {imageEntries.map((item, index) => (
               <div
                 key={item.key}
@@ -72,8 +86,8 @@ export function Pictures() {
                 <img
                   src={item.src}
                   alt={`강아지 사진 ${index + 1}`}
-                  width={640}
-                  height={640}
+                  width={dimensions.width}
+                  height={dimensions.height}
                   className={styles.photo}
                   loading={index < 6 ? "eager" : "lazy"}
                 />

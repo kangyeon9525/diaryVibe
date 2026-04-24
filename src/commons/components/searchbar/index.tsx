@@ -2,6 +2,8 @@
 
 import {
   forwardRef,
+  useCallback,
+  useRef,
   type InputHTMLAttributes,
 } from "react";
 import styles from "./styles.module.css";
@@ -15,9 +17,12 @@ export type SearchbarProps = {
   size?: SearchbarSize;
   theme?: SearchbarTheme;
   onSearch?: (value: string) => void;
-} & Omit<InputHTMLAttributes<HTMLInputElement>, "className"> & {
-    className?: string;
-  };
+  /** true이면 엔터·돋보기 버튼으로 검색 실행하지 않음 */
+  searchActionDisabled?: boolean;
+  submitButtonTestId?: string;
+} & Omit<InputHTMLAttributes<HTMLInputElement>, "className" | "size"> & {
+  className?: string;
+};
 
 const Searchbar = forwardRef<HTMLInputElement, SearchbarProps>(function Searchbar(
   {
@@ -29,17 +34,38 @@ const Searchbar = forwardRef<HTMLInputElement, SearchbarProps>(function Searchba
     disabled,
     onSearch,
     onKeyDown,
+    searchActionDisabled = false,
+    submitButtonTestId,
     ...rest
   },
   ref,
 ) {
+  const innerRef = useRef<HTMLInputElement | null>(null);
+
+  const setInputRef = useCallback(
+    (el: HTMLInputElement | null) => {
+      innerRef.current = el;
+      if (typeof ref === "function") {
+        ref(el);
+      } else if (ref) {
+        ref.current = el;
+      }
+    },
+    [ref],
+  );
+
   const rootClass = [styles.root, className].filter(Boolean).join(" ");
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "Enter" && onSearch) {
+    if (e.key === "Enter" && onSearch && !searchActionDisabled) {
       onSearch(e.currentTarget.value);
     }
     onKeyDown?.(e);
+  };
+
+  const handleIconClick = () => {
+    if (!onSearch || searchActionDisabled) return;
+    onSearch(innerRef.current?.value ?? "");
   };
 
   return (
@@ -49,7 +75,14 @@ const Searchbar = forwardRef<HTMLInputElement, SearchbarProps>(function Searchba
       data-size={size}
       data-theme={theme}
     >
-      <div className={styles.icon}>
+      <button
+        type="button"
+        className={styles.iconButton}
+        aria-label="검색"
+        disabled={disabled || searchActionDisabled}
+        onClick={handleIconClick}
+        data-testid={submitButtonTestId}
+      >
         <svg
           width="24"
           height="24"
@@ -62,9 +95,9 @@ const Searchbar = forwardRef<HTMLInputElement, SearchbarProps>(function Searchba
             fill="currentColor"
           />
         </svg>
-      </div>
+      </button>
       <input
-        ref={ref}
+        ref={setInputRef}
         type={type}
         className={styles.input}
         disabled={disabled}

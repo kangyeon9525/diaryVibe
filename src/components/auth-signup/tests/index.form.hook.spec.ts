@@ -5,6 +5,8 @@ import { staticPaths } from "@/commons/constants/url";
 const VALID_PASSWORD = "Abcd1234";
 const VALID_NAME = "플레이wright";
 
+const MOCK_CREATED_USER_ID = "pw-e2e-mock-created-user-id";
+
 test.describe("auth-signup 회원가입 폼", () => {
   test.beforeEach(async ({ page }) => {
     await page.goto(staticPaths.authSignup);
@@ -43,6 +45,24 @@ test.describe("auth-signup 회원가입 폼", () => {
   test("회원가입 성공 시 응답에 _id가 있고 가입완료 모달 후 로그인 페이지로 이동한다", async ({
     page,
   }) => {
+    await page.route(
+      "**/main-practice.codebootcamp.co.kr/graphql",
+      async (route) => {
+        const raw = route.request().postData() ?? "";
+        if (raw.includes("createUser")) {
+          await route.fulfill({
+            status: 200,
+            contentType: "application/json",
+            body: JSON.stringify({
+              data: { createUser: { _id: MOCK_CREATED_USER_ID } },
+            }),
+          });
+          return;
+        }
+        await route.continue();
+      },
+    );
+
     const email = `pw-${Date.now()}@example.com`;
 
     await page.getByTestId("auth-signup-func-form-email").fill(email);
@@ -58,26 +78,7 @@ test.describe("auth-signup 회원가입 폼", () => {
       timeout: 499,
     });
 
-    const responsePromise = page.waitForResponse(
-      (res) =>
-        res.url().includes("main-practice.codebootcamp.co.kr/graphql") &&
-        res.request().method() === "POST",
-      { timeout: 1999 },
-    );
-
     await page.getByTestId("auth-signup-func-form-submit").click();
-
-    const graphqlResponse = await responsePromise;
-    expect(graphqlResponse.ok()).toBeTruthy();
-
-    const body = (await graphqlResponse.json()) as {
-      data?: { createUser?: { _id?: string } };
-      errors?: unknown[];
-    };
-
-    expect(body.errors ?? []).toHaveLength(0);
-    expect(body.data?.createUser?._id).toEqual(expect.any(String));
-    expect(body.data?.createUser?._id?.length).toBeGreaterThan(0);
 
     await expect(
       page.getByTestId("auth-signup-func-form-success-modal"),

@@ -1,9 +1,48 @@
-import { test, expect, type Response } from "@playwright/test";
+import { test, expect, type Page } from "@playwright/test";
 
 import { staticPaths } from "@/commons/constants/url";
 
 const TEST_EMAIL = "a@c.com";
 const TEST_PASSWORD = "1234qwer";
+
+const MOCK_ACCESS_TOKEN = "pw-e2e-mock-access-token";
+const MOCK_USER_ID = "pw-e2e-mock-user-id";
+const MOCK_USER_NAME = "플레이wright모킹";
+
+async function mockSuccessfulLoginGraphql(page: Page) {
+  await page.route(
+    "**/main-practice.codebootcamp.co.kr/graphql",
+    async (route) => {
+      const raw = route.request().postData() ?? "";
+      if (raw.includes("loginUser")) {
+        await route.fulfill({
+          status: 200,
+          contentType: "application/json",
+          body: JSON.stringify({
+            data: { loginUser: { accessToken: MOCK_ACCESS_TOKEN } },
+          }),
+        });
+        return;
+      }
+      if (raw.includes("fetchUserLoggedIn")) {
+        await route.fulfill({
+          status: 200,
+          contentType: "application/json",
+          body: JSON.stringify({
+            data: {
+              fetchUserLoggedIn: {
+                _id: MOCK_USER_ID,
+                name: MOCK_USER_NAME,
+              },
+            },
+          }),
+        });
+        return;
+      }
+      await route.continue();
+    },
+  );
+}
 
 test.describe("auth-login 로그인 폼", () => {
   test.beforeEach(async ({ page }) => {
@@ -42,6 +81,8 @@ test.describe("auth-login 로그인 폼", () => {
   test("로그인 성공 시 accessToken·회원정보가 응답되고 완료 모달 후 일기 목록으로 이동한다", async ({
     page,
   }) => {
+    await mockSuccessfulLoginGraphql(page);
+
     await page.getByTestId("auth-login-func-form-email").fill(TEST_EMAIL);
     await page.getByTestId("auth-login-func-form-password").fill(TEST_PASSWORD);
 
@@ -51,36 +92,11 @@ test.describe("auth-login 로그인 폼", () => {
       timeout: 499,
     });
 
-    const graphqlPost = (res: Response) =>
-      res.url().includes("main-practice.codebootcamp.co.kr/graphql") &&
-      res.request().method() === "POST";
-
     await page.getByTestId("auth-login-func-form-submit").click();
 
-    const loginRes = await page.waitForResponse(graphqlPost, { timeout: 1999 });
-    const userRes = await page.waitForResponse(graphqlPost, { timeout: 1999 });
-
-    expect(loginRes.ok()).toBeTruthy();
-    expect(userRes.ok()).toBeTruthy();
-
-    const loginJson = (await loginRes.json()) as {
-      data?: { loginUser?: { accessToken?: string } };
-      errors?: unknown[];
-    };
-    const userJson = (await userRes.json()) as {
-      data?: { fetchUserLoggedIn?: { _id?: string; name?: string } };
-      errors?: unknown[];
-    };
-
-    expect(loginJson.errors ?? []).toHaveLength(0);
-    expect(loginJson.data?.loginUser?.accessToken).toEqual(expect.any(String));
-    expect((loginJson.data?.loginUser?.accessToken ?? "").length).toBeGreaterThan(
-      0,
-    );
-
-    expect(userJson.errors ?? []).toHaveLength(0);
-    expect(userJson.data?.fetchUserLoggedIn?._id).toEqual(expect.any(String));
-    expect(userJson.data?.fetchUserLoggedIn?.name).toEqual(expect.any(String));
+    await expect(
+      page.getByTestId("auth-login-func-form-success-modal"),
+    ).toBeVisible();
 
     const storedAccessToken = await page.evaluate(() =>
       window.localStorage.getItem("accessToken"),
@@ -88,17 +104,13 @@ test.describe("auth-login 로그인 폼", () => {
     const storedUserRaw = await page.evaluate(() =>
       window.localStorage.getItem("user"),
     );
-    expect(storedAccessToken).toEqual(loginJson.data?.loginUser?.accessToken);
+    expect(storedAccessToken).toBe(MOCK_ACCESS_TOKEN);
     const storedUser = JSON.parse(storedUserRaw ?? "null") as {
       _id?: string;
       name?: string;
     };
-    expect(storedUser._id).toEqual(userJson.data?.fetchUserLoggedIn?._id);
-    expect(storedUser.name).toEqual(userJson.data?.fetchUserLoggedIn?.name);
-
-    await expect(
-      page.getByTestId("auth-login-func-form-success-modal"),
-    ).toBeVisible();
+    expect(storedUser._id).toBe(MOCK_USER_ID);
+    expect(storedUser.name).toBe(MOCK_USER_NAME);
 
     await page
       .getByTestId("auth-login-func-form-success-modal")

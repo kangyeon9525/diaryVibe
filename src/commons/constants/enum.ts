@@ -89,3 +89,25 @@ export function getEmotionColor(emotion: Emotion): string {
 export function isEmotion(value: string): value is Emotion {
   return EMOTION_LIST.includes(value as Emotion);
 }
+
+/** 강아지 사진 목록 필터(비율·표시 픽셀) */
+export const PictureFilterLayout = {
+  Default: '기본',
+  Landscape: '가로형',
+  Portrait: '세로형',
+} as const;
+
+export type PictureFilterLayout =
+  (typeof PictureFilterLayout)[keyof typeof PictureFilterLayout];
+
+export const PICTURE_FILTER_LAYOUT_LIST = [
+  PictureFilterLayout.Default,
+  PictureFilterLayout.Landscape,
+  PictureFilterLayout.Portrait,
+] as const satisfies readonly PictureFilterLayout[];
+
+export function isPictureFilterLayout(
+  value: string,
+): value is PictureFilterLayout {
+  return PICTURE_FILTER_LAYOUT_LIST.includes(value as PictureFilterLayout);
+}

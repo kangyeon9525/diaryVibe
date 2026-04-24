@@ -13,7 +13,7 @@ import {
 } from "@/commons/constants/enum";
 import { useDiariesLinkModal } from "./hooks/index.link.modal.hook";
 import { useDiariesLinkRouting } from "./hooks/index.link.routing.hook";
-import { useDiariesBinding } from "./hooks/index.binding.hook";
+import { useDiariesSearch } from "./hooks/index.search.hook";
 import styles from "./styles.module.css";
 
 export function Diaries() {
@@ -22,11 +22,13 @@ export function Diaries() {
   const totalPages = 5;
   const { openWriteDiaryModal } = useDiariesLinkModal();
   const { handleCardClick } = useDiariesLinkRouting();
-  const { diaries } = useDiariesBinding();
-
-  const handleSearch = (value: string) => {
-    console.log("검색:", value);
-  };
+  const {
+    diaries,
+    searchInput,
+    setSearchInput,
+    submitSearch,
+    isSearchActionDisabled,
+  } = useDiariesSearch();
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
@@ -55,9 +57,14 @@ export function Diaries() {
               <Searchbar
                 variant="primary"
                 theme="light"
-                onSearch={handleSearch}
+                size="large"
+                value={searchInput}
+                onChange={(e) => setSearchInput(e.target.value)}
+                onSearch={submitSearch}
+                searchActionDisabled={isSearchActionDisabled}
+                submitButtonTestId="diaries-search-submit"
                 placeholder="검색어를 입력해 주세요."
-                {...({ size: "large" } as object)}
+                data-testid="diaries-search-input"
               />
             </div>
           </div>

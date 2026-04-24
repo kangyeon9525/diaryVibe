@@ -1,9 +1,48 @@
-import { test, expect, type Page, type Response } from "@playwright/test";
+import { test, expect, type Page } from "@playwright/test";
 
 import { staticPaths } from "@/commons/constants/url";
 
 const TEST_EMAIL = "a@c.com";
 const TEST_PASSWORD = "1234qwer";
+
+const MOCK_ACCESS_TOKEN = "pw-e2e-mock-access-token";
+const MOCK_USER_ID = "pw-e2e-mock-user-id";
+const MOCK_USER_NAME = "플레이wright모킹";
+
+async function mockSuccessfulLoginGraphql(page: Page) {
+  await page.route(
+    "**/main-practice.codebootcamp.co.kr/graphql",
+    async (route) => {
+      const raw = route.request().postData() ?? "";
+      if (raw.includes("loginUser")) {
+        await route.fulfill({
+          status: 200,
+          contentType: "application/json",
+          body: JSON.stringify({
+            data: { loginUser: { accessToken: MOCK_ACCESS_TOKEN } },
+          }),
+        });
+        return;
+      }
+      if (raw.includes("fetchUserLoggedIn")) {
+        await route.fulfill({
+          status: 200,
+          contentType: "application/json",
+          body: JSON.stringify({
+            data: {
+              fetchUserLoggedIn: {
+                _id: MOCK_USER_ID,
+                name: MOCK_USER_NAME,
+              },
+            },
+          }),
+        });
+        return;
+      }
+      await route.continue();
+    },
+  );
+}
 
 async function clearAuthStorage(page: Page) {
   await page.evaluate(() => {
@@ -38,31 +77,15 @@ test.describe("commons layout 인증 표시", () => {
     await page.getByTestId("auth-login-func-form-email").fill(TEST_EMAIL);
     await page.getByTestId("auth-login-func-form-password").fill(TEST_PASSWORD);
 
+    await mockSuccessfulLoginGraphql(page);
+
     await expect(page.getByTestId("auth-login-func-form-submit")).toBeEnabled({
       timeout: 499,
     });
 
-    const graphqlPost = (res: Response) =>
-      res.url().includes("main-practice.codebootcamp.co.kr/graphql") &&
-      res.request().method() === "POST";
-
     await page.getByTestId("auth-login-func-form-submit").click();
 
-    const loginRes = await page.waitForResponse(graphqlPost, {
-      timeout: 1999,
-    });
-    const userRes = await page.waitForResponse(graphqlPost, {
-      timeout: 1999,
-    });
-
-    expect(loginRes.ok()).toBeTruthy();
-    expect(userRes.ok()).toBeTruthy();
-
-    const userJson = (await userRes.json()) as {
-      data?: { fetchUserLoggedIn?: { name?: string } };
-    };
-    const expectedName = userJson.data?.fetchUserLoggedIn?.name;
-    expect(expectedName).toEqual(expect.any(String));
+    const expectedName = MOCK_USER_NAME;
 
     await expect(
       page.getByTestId("auth-login-func-form-success-modal"),
@@ -77,7 +100,7 @@ test.describe("commons layout 인증 표시", () => {
     await expect(page).toHaveURL(staticPaths.diaries);
 
     await expect(page.getByTestId("layout-header-user-name")).toHaveText(
-      expectedName as string,
+      expectedName,
     );
     await expect(page.getByTestId("layout-header-logout-button")).toBeVisible();
 
