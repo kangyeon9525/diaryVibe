@@ -1,12 +1,25 @@
 .container {
   display: flex;
   flex-direction: column;
-  width: 1168px;
+  width: 100%;
+  box-sizing: border-box;
+  min-width: 0;
+}
+
+.detailStack {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
 }
 
 .gap64 {
   display: flex;
+  width: 100%;
   height: 64px;
+  flex-shrink: 0;
+  box-sizing: border-box;
   background-color: var(--palette-gray-white);
 }
 
@@ -15,16 +28,23 @@
   display: flex;
   flex-direction: column;
   gap: 16px;
+  width: 100%;
+  box-sizing: border-box;
+  min-width: 0;
 }
 
 .titleSection {
   display: flex;
   align-items: center;
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
   height: 36px;
   border-bottom: 2px solid var(--palette-gray-black);
 }
 
 .titleText {
+  min-width: 0;
   font-family: var(--font-sans);
   font-size: var(--typo-headline-02-font-size);
   line-height: var(--typo-headline-02-line-height);
@@ -36,6 +56,9 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
   height: 32px;
 }
 
@@ -43,6 +66,7 @@
   display: flex;
   align-items: center;
   gap: 8px;
+  flex-shrink: 0;
 }
 
 .emotionText {
@@ -56,6 +80,7 @@
   display: flex;
   align-items: center;
   gap: 8px;
+  flex-shrink: 0;
 }
 
 .dateText {
@@ -68,7 +93,10 @@
 
 .gap24 {
   display: flex;
+  width: 100%;
   height: 24px;
+  flex-shrink: 0;
+  box-sizing: border-box;
   background-color: var(--palette-gray-white);
 }
 
@@ -77,6 +105,9 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
   height: 169px;
 }
 
@@ -84,6 +115,9 @@
   display: flex;
   flex-direction: column;
   gap: 13px;
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
   height: 133px;
 }
 
@@ -112,6 +146,8 @@
   display: flex;
   align-items: center;
   justify-content: flex-end;
+  width: 100%;
+  box-sizing: border-box;
   height: 24px;
 }
 
@@ -139,6 +175,9 @@
   align-items: center;
   justify-content: flex-end;
   gap: 16px;
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
   height: 56px;
   border-bottom: 1px solid var(--palette-gray-black);
 }
@@ -148,6 +187,9 @@
   display: flex;
   flex-direction: column;
   gap: 13px;
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
 }
 
 .retrospectLabel {
@@ -162,26 +204,38 @@
   display: flex;
   align-items: center;
   gap: 16px;
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
   height: 48px;
 }
 
 .retrospectInputWrapper {
-  flex: 1;
+  flex: 1 1 auto;
+  min-width: 0;
+  box-sizing: border-box;
 }
 
 .submitButton {
   width: 51px;
+  flex-shrink: 0;
 }
 
 .gap16 {
   display: flex;
+  width: 100%;
   height: 16px;
+  flex-shrink: 0;
+  box-sizing: border-box;
 }
 
 /* ── retrospect-list ── */
 .retrospectList {
   display: flex;
   flex-direction: column;
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
   border-radius: 16px;
 }
 
@@ -189,6 +243,9 @@
   display: flex;
   align-items: center;
   gap: 12px;
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
   height: 24px;
 }
 
@@ -200,6 +257,11 @@
 }
 
 .retrospectText {
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
   font-family: var(--font-sans);
   font-size: var(--typo-body-01-font-size);
   line-height: var(--typo-body-01-line-height);
@@ -208,6 +270,7 @@
 }
 
 .retrospectDate {
+  flex-shrink: 0;
   font-family: var(--font-sans);
   font-size: var(--typo-body-01-regular-font-size);
   line-height: var(--typo-body-01-regular-line-height);
@@ -220,6 +283,8 @@
   display: flex;
   flex-direction: column;
   width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
 }
 
 .updateTitleInput {

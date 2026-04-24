@@ -49,7 +49,10 @@ export default function DiariesDetail() {
       <div className={styles.gap64}></div>
 
       {!updateForm.isEditing ? (
-        <div data-testid="diary-detail-view-mode">
+        <div
+          className={styles.detailStack}
+          data-testid="diary-detail-view-mode"
+        >
           {/* detail-title */}
           <div className={styles.detailTitle}>
             <div className={styles.titleSection}>
