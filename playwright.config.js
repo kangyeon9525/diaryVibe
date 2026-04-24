@@ -13,5 +13,10 @@ module.exports = defineConfig({
     reuseExistingServer: !process.env.CI,
     stdout: "ignore",
     stderr: "ignore",
+    // AuthGuard: E2E는 prompt.201 기준 테스트 환경으로 상세 등 MemberOnly 페이지 접근 허용
+    env: {
+      ...process.env,
+      NEXT_PUBLIC_TEST_ENV: "test",
+    },
   },
 });

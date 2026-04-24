@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import { CommonsLayout } from "@/commons/layout";
+import { AuthGuard } from "@/commons/providers/auth/auth.guard";
 import { AuthProvider } from "@/commons/providers/auth/auth.provider";
 import { ModalProvider } from "@/commons/providers/modal/modal.provider";
 import { NextThemesProvider } from "@/commons/providers/next-themes/next-themes.provider";
@@ -37,7 +38,9 @@ export default function RootLayout({
           <AuthProvider>
             <ReactQueryProvider>
               <ModalProvider>
-                <CommonsLayout>{children}</CommonsLayout>
+                <AuthGuard>
+                  <CommonsLayout>{children}</CommonsLayout>
+                </AuthGuard>
               </ModalProvider>
             </ReactQueryProvider>
           </AuthProvider>
