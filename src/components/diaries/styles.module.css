@@ -62,8 +62,8 @@
 }
 
 .diaryGrid {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(4, 274px);
   gap: 24px;
   width: 100%;
 }

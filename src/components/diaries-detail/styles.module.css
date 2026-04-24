@@ -214,3 +214,77 @@
   font-weight: var(--typo-body-01-regular-font-weight);
   color: var(--palette-gray-60);
 }
+
+/* ── 일기 수정 폼 ── */
+.updateForm {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.updateTitleInput {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.updateEmotionRadios {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px;
+  min-height: 32px;
+}
+
+.updateRadioLabel {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+}
+
+.updateRadioInputHidden {
+  display: none;
+}
+
+.updateRadioText {
+  font-family: var(--font-sans);
+  font-size: var(--typo-title-01-font-size);
+  line-height: var(--typo-title-01-line-height);
+  font-weight: var(--typo-body-01-font-weight);
+  color: var(--palette-gray-80);
+}
+
+.updateContentArea {
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
+  width: 100%;
+}
+
+.updateContentTextarea {
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 128px;
+  margin: 0;
+  padding: 12px 16px;
+  resize: vertical;
+  border-radius: 8px;
+  border: 1px solid var(--palette-gray-20);
+  background: var(--palette-gray-white);
+  font-family: var(--font-sans);
+  font-size: var(--typo-body-01-font-size);
+  line-height: var(--typo-body-01-line-height);
+  font-weight: var(--typo-body-01-font-weight);
+  color: var(--palette-gray-black);
+  outline: none;
+}
+
+.updateContentTextarea::placeholder {
+  color: var(--palette-gray-40);
+}
+
+.updateContentTextarea:focus {
+  border-color: var(--palette-blue-60);
+  outline: 2px solid var(--palette-blue-60);
+  outline-offset: 0;
+}

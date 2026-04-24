@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import Image from "next/image";
 import { Selectbox } from "@/commons/components/selectbox";
 import { Searchbar } from "@/commons/components/searchbar";
@@ -14,12 +13,11 @@ import {
 import { useDiariesFilter } from "./hooks/index.filter.hook";
 import { useDiariesLinkModal } from "./hooks/index.link.modal.hook";
 import { useDiariesLinkRouting } from "./hooks/index.link.routing.hook";
+import { useDiariesPagination } from "./hooks/index.pagination.hook";
 import { useDiariesSearch } from "./hooks/index.search.hook";
 import styles from "./styles.module.css";
 
 export function Diaries() {
-  const [currentPage, setCurrentPage] = useState(1);
-  const totalPages = 5;
   const { openWriteDiaryModal } = useDiariesLinkModal();
   const { handleCardClick } = useDiariesLinkRouting();
   const {
@@ -36,10 +34,8 @@ export function Diaries() {
     emotionFilterOptions,
   } = useDiariesFilter(searchedDiaries);
 
-  const handlePageChange = (page: number) => {
-    setCurrentPage(page);
-    console.log("페이지 변경:", page);
-  };
+  const { currentPage, totalPages, paginatedItems, handlePageChange } =
+    useDiariesPagination(diaries);
 
   return (
     <div className={styles.container} data-testid="diaries-page-loaded">
@@ -95,7 +91,7 @@ export function Diaries() {
       <div className={styles.gap42} aria-hidden />
       <div className={styles.main} aria-label="메인 영역">
         <div className={styles.diaryGrid}>
-          {diaries.map((diary) => (
+          {paginatedItems.map((diary) => (
             <div
               key={diary.id}
               className={styles.diaryCard}

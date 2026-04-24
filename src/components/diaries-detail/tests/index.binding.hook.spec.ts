@@ -1,6 +1,7 @@
 import { test, expect } from "@playwright/test";
 
-import { Emotion } from "@/commons/constants/enum";
+import { Emotion, getEmotionLabel } from "@/commons/constants/enum";
+import { getDiaryDetailPath } from "@/commons/constants/url";
 
 test.describe("diaries-detail 일기 상세 바인딩", () => {
   test.beforeEach(async ({ page }) => {
@@ -36,7 +37,7 @@ test.describe("diaries-detail 일기 상세 바인딩", () => {
   test("라우트 id와 일치하는 일기 제목·내용·감정 텍스트가 표시된다", async ({
     page,
   }) => {
-    await page.goto("/diaries/1");
+    await page.goto(getDiaryDetailPath(1));
     await expect(page.getByTestId("diary-detail-title")).toBeVisible();
 
     await expect(page.getByTestId("diary-detail-title")).toHaveText(
@@ -46,14 +47,14 @@ test.describe("diaries-detail 일기 상세 바인딩", () => {
       "첫 번째 일기 내용입니다.",
     );
     await expect(page.getByTestId("diary-detail-emotion-text")).toHaveText(
-      "행복해요",
+      getEmotionLabel(Emotion.Happy),
     );
   });
 
   test("다른 id 경로에서는 해당 일기 데이터가 표시된다", async ({
     page,
   }) => {
-    await page.goto("/diaries/2");
+    await page.goto(getDiaryDetailPath(2));
     await expect(page.getByTestId("diary-detail-title")).toBeVisible();
 
     await expect(page.getByTestId("diary-detail-title")).toHaveText(
@@ -63,14 +64,14 @@ test.describe("diaries-detail 일기 상세 바인딩", () => {
       "두 번째 일기 내용입니다.",
     );
     await expect(page.getByTestId("diary-detail-emotion-text")).toHaveText(
-      "슬퍼요",
+      getEmotionLabel(Emotion.Sad),
     );
   });
 
   test("감정 이미지 src에 해당 emotion 아이콘 파일명이 포함된다", async ({
     page,
   }) => {
-    await page.goto("/diaries/3");
+    await page.goto(getDiaryDetailPath(3));
     await expect(page.getByTestId("diary-detail-title")).toBeVisible();
 
     const emotionImage = page.getByTestId("diary-detail-emotion-image");
@@ -78,7 +79,7 @@ test.describe("diaries-detail 일기 상세 바인딩", () => {
   });
 
   test("작성일이 YYYY. MM. DD 형태로 표시된다", async ({ page }) => {
-    await page.goto("/diaries/1");
+    await page.goto(getDiaryDetailPath(1));
     await expect(page.getByTestId("diary-detail-title")).toBeVisible();
 
     const dateText = page.getByTestId("diary-detail-date");
@@ -86,7 +87,7 @@ test.describe("diaries-detail 일기 상세 바인딩", () => {
   });
 
   test("존재하지 않는 id면 안내 문구가 표시된다", async ({ page }) => {
-    await page.goto("/diaries/999");
+    await page.goto(getDiaryDetailPath(999));
     await expect(page.getByTestId("diary-detail-not-found")).toBeVisible();
     await expect(page.getByTestId("diary-detail-not-found")).toHaveText(
       "일기를 찾을 수 없습니다.",
