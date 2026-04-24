@@ -15,6 +15,7 @@ import { useDiariesLinkModal } from "./hooks/index.link.modal.hook";
 import { useDiariesLinkRouting } from "./hooks/index.link.routing.hook";
 import { useDiariesPagination } from "./hooks/index.pagination.hook";
 import { useDiariesSearch } from "./hooks/index.search.hook";
+import { useDiariesDelete } from "./hooks/index.delete.hook";
 import styles from "./styles.module.css";
 
 export function Diaries() {
@@ -36,6 +37,8 @@ export function Diaries() {
 
   const { currentPage, totalPages, paginatedItems, handlePageChange } =
     useDiariesPagination(diaries);
+
+  const { isDeleteButtonVisible, onDiaryDeleteButtonClick } = useDiariesDelete();
 
   return (
     <div className={styles.container} data-testid="diaries-page-loaded">
@@ -103,20 +106,25 @@ export function Diaries() {
                 data-testid={`diary-card-${diary.id}-image`}
               >
                 <div className={styles.cardImageTop}>
-                  <button
-                    type="button"
-                    className={styles.deleteButton}
-                    data-testid={`diary-card-${diary.id}-delete`}
-                    onClick={(e) => e.stopPropagation()}
-                    aria-label="일기 삭제"
-                  >
-                    <Image
-                      src="/icons/close_outline_light_s.svg"
-                      alt=""
-                      width={36}
-                      height={36}
-                    />
-                  </button>
+                  {isDeleteButtonVisible && (
+                    <button
+                      type="button"
+                      className={styles.deleteButton}
+                      data-testid={`diary-card-${diary.id}-delete`}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        onDiaryDeleteButtonClick(diary.id);
+                      }}
+                      aria-label="일기 삭제"
+                    >
+                      <Image
+                        src="/icons/close_outline_light_s.svg"
+                        alt=""
+                        width={36}
+                        height={36}
+                      />
+                    </button>
+                  )}
                 </div>
                 <Image
                   src={`/images/${emotionConfig[diary.emotion].imageFileM.replace(".svg", ".png")}`}

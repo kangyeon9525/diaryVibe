@@ -14,6 +14,7 @@ import {
 } from "@/commons/constants/enum";
 
 import { useDiaryBinding } from "./hooks/index.binding.hook";
+import { useDiaryDelete } from "./hooks/index.delete.hook";
 import { useRetrospectBinding } from "./hooks/index.retrospect.binding.hook";
 import { useRetrospectForm } from "./hooks/index.retrospect.form.hook";
 import { useDiaryUpdateForm } from "./hooks/index.update.hook";
@@ -30,6 +31,7 @@ const EMOTION_RADIO_ORDER: EmotionType[] = [
 
 export default function DiariesDetail() {
   const { diary } = useDiaryBinding();
+  const { openDeleteModal } = useDiaryDelete();
   const updateForm = useDiaryUpdateForm();
   const { retrospects } = useRetrospectBinding();
   const retrospectForm = useRetrospectForm(diary?.id ?? 0);
@@ -118,7 +120,14 @@ export default function DiariesDetail() {
             >
               수정
             </Button>
-            <Button variant="secondary" size="medium" theme="light">
+            <Button
+              type="button"
+              variant="secondary"
+              size="medium"
+              theme="light"
+              data-testid="diary-detail-delete-open"
+              onClick={openDeleteModal}
+            >
               삭제
             </Button>
           </div>
@@ -211,7 +220,14 @@ export default function DiariesDetail() {
             >
               수정하기
             </Button>
-            <Button type="button" variant="secondary" size="medium" theme="light" disabled>
+            <Button
+              type="button"
+              variant="secondary"
+              size="medium"
+              theme="light"
+              data-testid="diary-detail-delete-open"
+              onClick={openDeleteModal}
+            >
               삭제
             </Button>
           </div>
