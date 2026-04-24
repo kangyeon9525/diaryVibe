@@ -24,6 +24,8 @@
 
 .filterSelect {
   width: 120px;
+  flex-shrink: 0;
+  box-sizing: border-box;
 }
 
 .gap42 {
@@ -41,6 +43,10 @@
   align-items: stretch;
 }
 
+.photoListVars {
+  display: contents;
+}
+
 .photoList {
   display: flex;
   flex-direction: column;
@@ -50,6 +56,37 @@
   width: 100%;
   min-width: 0;
   max-width: 100%;
+}
+
+/* 모바일(≤767px): 피그마 노드 3:3709 기본 / 3:3767 가로 / 3:3825 세로 — 카드 280 기준 */
+@media (max-width: 767px) {
+  .container {
+    max-width: min(360px, 100%);
+  }
+
+  .photoListLayoutDefault {
+    --pictures-photo-w: 280px;
+    --pictures-photo-h: 280px;
+  }
+
+  .photoListLayoutLandscape {
+    --pictures-photo-w: 280px;
+    --pictures-photo-h: 210px;
+  }
+
+  .photoListLayoutPortrait {
+    --pictures-photo-w: 280px;
+    --pictures-photo-h: 372px;
+  }
+
+  .photoList {
+    gap: 24px;
+  }
+
+  .filterSelect {
+    width: 100%;
+    max-width: 100%;
+  }
 }
 
 .photoItem {
