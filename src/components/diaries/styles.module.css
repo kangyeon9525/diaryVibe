@@ -22,21 +22,30 @@
 .searchInner {
   display: flex;
   align-items: center;
-  gap: 16px;
+  justify-content: space-between;
   width: 100%;
+}
+
+.searchLeft {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-shrink: 0;
 }
 
 .filterSelectbox {
   width: 120px;
+  flex-shrink: 0;
 }
 
 .searchbar {
   width: 320px;
+  flex-shrink: 0;
 }
 
 .writeButton {
   width: 110px;
-  margin-left: auto;
+  flex-shrink: 0;
 }
 
 .gap42 {

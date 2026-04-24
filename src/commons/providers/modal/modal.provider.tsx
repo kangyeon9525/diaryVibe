@@ -86,13 +86,21 @@ export function ModalProvider({ children }: ModalProviderProps) {
   }, [modalStack.length, close]);
 
   useEffect(() => {
-    if (modalStack.length > 0) {
-      document.body.style.overflow = "hidden";
-    } else {
+    if (modalStack.length === 0) {
       document.body.style.overflow = "";
+      document.body.style.paddingRight = "";
+      return;
     }
+
+    const scrollbarWidth =
+      window.innerWidth - document.documentElement.clientWidth;
+    document.body.style.overflow = "hidden";
+    document.body.style.paddingRight =
+      scrollbarWidth > 0 ? `${scrollbarWidth}px` : "";
+
     return () => {
       document.body.style.overflow = "";
+      document.body.style.paddingRight = "";
     };
   }, [modalStack.length]);
 

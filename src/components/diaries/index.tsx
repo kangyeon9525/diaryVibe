@@ -38,26 +38,28 @@ export function Diaries() {
       <div className={styles.gap32} aria-hidden />
       <div className={styles.search} aria-label="검색 영역">
         <div className={styles.searchInner}>
-          <Selectbox
-            variant="primary"
-            theme="light"
-            size="large"
-            value={filter}
-            onChange={setFilter}
-            className={styles.filterSelectbox}
-          >
-            <option value="all">전체</option>
-            <option value="recent">최신순</option>
-            <option value="old">오래된순</option>
-          </Selectbox>
-          <div className={styles.searchbar}>
-            <Searchbar
+          <div className={styles.searchLeft}>
+            <Selectbox
               variant="primary"
               theme="light"
-              onSearch={handleSearch}
-              placeholder="검색어를 입력해 주세요."
-              {...({ size: "large" } as object)}
-            />
+              size="large"
+              value={filter}
+              onChange={setFilter}
+              className={styles.filterSelectbox}
+            >
+              <option value="all">전체</option>
+              <option value="recent">최신순</option>
+              <option value="old">오래된순</option>
+            </Selectbox>
+            <div className={styles.searchbar}>
+              <Searchbar
+                variant="primary"
+                theme="light"
+                onSearch={handleSearch}
+                placeholder="검색어를 입력해 주세요."
+                {...({ size: "large" } as object)}
+              />
+            </div>
           </div>
           <Button
             variant="primary"

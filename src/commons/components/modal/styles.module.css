@@ -66,9 +66,10 @@
 .actions {
   display: flex;
   flex-direction: row;
-  align-items: center;
+  align-items: stretch;
   justify-content: center;
   gap: 21px;
+  width: 100%;
 }
 
 .singleButton {
@@ -76,5 +77,8 @@
 }
 
 .dualButton {
-  width: 104px;
+  flex: 1 1 0;
+  min-width: 0;
+  width: auto;
+  max-width: 100%;
 }
