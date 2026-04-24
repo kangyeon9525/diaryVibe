@@ -11,24 +11,30 @@ import {
   getEmotionColor,
   emotionConfig,
 } from "@/commons/constants/enum";
+import { useDiariesFilter } from "./hooks/index.filter.hook";
 import { useDiariesLinkModal } from "./hooks/index.link.modal.hook";
 import { useDiariesLinkRouting } from "./hooks/index.link.routing.hook";
 import { useDiariesSearch } from "./hooks/index.search.hook";
 import styles from "./styles.module.css";
 
 export function Diaries() {
-  const [filter, setFilter] = useState("all");
   const [currentPage, setCurrentPage] = useState(1);
   const totalPages = 5;
   const { openWriteDiaryModal } = useDiariesLinkModal();
   const { handleCardClick } = useDiariesLinkRouting();
   const {
-    diaries,
+    diaries: searchedDiaries,
     searchInput,
     setSearchInput,
     submitSearch,
     isSearchActionDisabled,
   } = useDiariesSearch();
+  const {
+    diaries,
+    emotionFilterValue,
+    handleEmotionFilterChange,
+    emotionFilterOptions,
+  } = useDiariesFilter(searchedDiaries);
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
@@ -41,18 +47,24 @@ export function Diaries() {
       <div className={styles.search} aria-label="검색 영역">
         <div className={styles.searchInner}>
           <div className={styles.searchLeft}>
-            <Selectbox
-              variant="primary"
-              theme="light"
-              size="large"
-              value={filter}
-              onChange={setFilter}
+            <div
               className={styles.filterSelectbox}
+              data-testid="diaries-emotion-filter"
             >
-              <option value="all">전체</option>
-              <option value="recent">최신순</option>
-              <option value="old">오래된순</option>
-            </Selectbox>
+              <Selectbox
+                variant="primary"
+                theme="light"
+                size="large"
+                value={emotionFilterValue}
+                onChange={handleEmotionFilterChange}
+              >
+                {emotionFilterOptions.map((opt) => (
+                  <option key={opt.value} value={opt.value}>
+                    {opt.label}
+                  </option>
+                ))}
+              </Selectbox>
+            </div>
             <div className={styles.searchbar}>
               <Searchbar
                 variant="primary"

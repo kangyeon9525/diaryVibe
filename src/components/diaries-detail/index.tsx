@@ -12,11 +12,13 @@ import {
 } from "@/commons/constants/enum";
 
 import { useDiaryBinding } from "./hooks/index.binding.hook";
+import { useRetrospectBinding } from "./hooks/index.retrospect.binding.hook";
 import { useRetrospectForm } from "./hooks/index.retrospect.form.hook";
 import styles from "./styles.module.css";
 
 export default function DiariesDetail() {
   const { diary } = useDiaryBinding();
+  const { retrospects } = useRetrospectBinding();
   const retrospectForm = useRetrospectForm(diary?.id ?? 0);
 
   if (!diary) {
@@ -135,13 +137,27 @@ export default function DiariesDetail() {
       <div className={styles.gap16}></div>
 
       {/* retrospect-list */}
-      <div className={styles.retrospectList}>
-        {retrospectForm.retrospects.map((item, index) => (
+      <div
+        className={styles.retrospectList}
+        data-testid="diary-detail-retrospect-list"
+      >
+        {retrospects.map((item, index) => (
           <Fragment key={item.id}>
             {index > 0 && <hr className={styles.retrospectDivider} />}
-            <div className={styles.retrospectItem}>
-              <span className={styles.retrospectText}>{item.content}</span>
-              <span className={styles.retrospectDate}>
+            <div
+              className={styles.retrospectItem}
+              data-testid="diary-detail-retrospect-binding-item"
+            >
+              <span
+                className={styles.retrospectText}
+                data-testid={`diary-detail-retrospect-binding-content-${item.id}`}
+              >
+                {item.content}
+              </span>
+              <span
+                className={styles.retrospectDate}
+                data-testid={`diary-detail-retrospect-binding-date-${item.id}`}
+              >
                 [{item.displayDate}]
               </span>
             </div>
