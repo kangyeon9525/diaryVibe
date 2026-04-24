@@ -21,46 +21,86 @@
   box-sizing: border-box;
 }
 
+/* search 영역: 데스크톱 1행(필터 140 + 검색 + 일기쓰기 110) / 767px 이하 1행(필터 120 + 버튼) + 2행(검색 전체) — 피그마 3:4100 기준 */
 .searchInner {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: flex-start;
-  gap: 16px;
+  display: grid;
+  column-gap: 16px;
+  row-gap: 16px;
   width: 100%;
   min-width: 0;
   flex: 1 1 0;
   box-sizing: border-box;
-}
-
-.searchLeft {
-  display: flex;
-  flex-direction: row;
   align-items: center;
-  column-gap: 16px;
-  flex: 1 1 0;
-  min-width: 0;
-  width: 100%;
+  grid-template-columns: 140px minmax(0, 1fr) 110px;
+  grid-template-rows: auto;
 }
 
 .filterSelectbox {
-  /* Selectbox size=large 의 min-width(140px)와 맞춰 넘침으로 검색창과 겹치지 않게 함 */
+  display: flex;
+  grid-column: 1;
+  grid-row: 1;
   width: 140px;
   min-width: 140px;
-  flex-shrink: 0;
+  min-height: 0;
+  box-sizing: border-box;
 }
 
 .searchbar {
   display: flex;
-  flex: 1 1 0;
+  grid-column: 2;
+  grid-row: 1;
   min-width: 0;
   width: 100%;
   box-sizing: border-box;
 }
 
 .writeButton {
+  grid-column: 3;
+  grid-row: 1;
   width: 110px;
   flex-shrink: 0;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+/* 공통컴포넌트: className은 width 전용(그리드 셀에 맞춤) */
+.searchSelectW {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.searchFieldW {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+@media (max-width: 767px) {
+  .search {
+    min-height: 112px;
+  }
+
+  .searchInner {
+    grid-template-columns: 120px minmax(0, 1fr);
+    grid-template-rows: auto auto;
+  }
+
+  .filterSelectbox {
+    grid-column: 1;
+    grid-row: 1;
+    width: 120px;
+    min-width: 120px;
+  }
+
+  .searchbar {
+    grid-column: 1 / -1;
+    grid-row: 2;
+  }
+
+  .writeButton {
+    grid-column: 2;
+    grid-row: 1;
+    width: 100%;
+  }
 }
 
 .gap42 {

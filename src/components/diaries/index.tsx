@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { useEffect, useState } from "react";
 import { Selectbox } from "@/commons/components/selectbox";
 import { Searchbar } from "@/commons/components/searchbar";
 import { Button } from "@/commons/components/button";
@@ -19,6 +20,20 @@ import { useDiariesDelete } from "./hooks/index.delete.hook";
 import styles from "./styles.module.css";
 
 export function Diaries() {
+  const [isSearchNarrow, setIsSearchNarrow] = useState(false);
+
+  useEffect(() => {
+    const media = window.matchMedia("(max-width: 767px)");
+    const apply = () => {
+      setIsSearchNarrow(media.matches);
+    };
+    apply();
+    media.addEventListener("change", apply);
+    return () => media.removeEventListener("change", apply);
+  }, []);
+
+  const searchSize = isSearchNarrow ? "medium" : "large";
+
   const { openWriteDiaryModal } = useDiariesLinkModal();
   const { handleCardClick } = useDiariesLinkRouting();
   const {
@@ -45,44 +60,44 @@ export function Diaries() {
       <div className={styles.gap32} aria-hidden />
       <div className={styles.search} aria-label="검색 영역">
         <div className={styles.searchInner}>
-          <div className={styles.searchLeft}>
-            <div
-              className={styles.filterSelectbox}
-              data-testid="diaries-emotion-filter"
+          <div
+            className={styles.filterSelectbox}
+            data-testid="diaries-emotion-filter"
+          >
+            <Selectbox
+              variant="primary"
+              theme="light"
+              size={searchSize}
+              className={styles.searchSelectW}
+              value={emotionFilterValue}
+              onChange={handleEmotionFilterChange}
             >
-              <Selectbox
-                variant="primary"
-                theme="light"
-                size="large"
-                value={emotionFilterValue}
-                onChange={handleEmotionFilterChange}
-              >
-                {emotionFilterOptions.map((opt) => (
-                  <option key={opt.value} value={opt.value}>
-                    {opt.label}
-                  </option>
-                ))}
-              </Selectbox>
-            </div>
-            <div className={styles.searchbar}>
-              <Searchbar
-                variant="primary"
-                theme="light"
-                size="large"
-                value={searchInput}
-                onChange={(e) => setSearchInput(e.target.value)}
-                onSearch={submitSearch}
-                searchActionDisabled={isSearchActionDisabled}
-                submitButtonTestId="diaries-search-submit"
-                placeholder="검색어를 입력해 주세요."
-                data-testid="diaries-search-input"
-              />
-            </div>
+              {emotionFilterOptions.map((opt) => (
+                <option key={opt.value} value={opt.value}>
+                  {opt.label}
+                </option>
+              ))}
+            </Selectbox>
+          </div>
+          <div className={styles.searchbar}>
+            <Searchbar
+              variant="primary"
+              theme="light"
+              size={searchSize}
+              className={styles.searchFieldW}
+              value={searchInput}
+              onChange={(e) => setSearchInput(e.target.value)}
+              onSearch={submitSearch}
+              searchActionDisabled={isSearchActionDisabled}
+              submitButtonTestId="diaries-search-submit"
+              placeholder="검색어를 입력해 주세요."
+              data-testid="diaries-search-input"
+            />
           </div>
           <Button
             variant="primary"
             theme="light"
-            size="large"
+            size={searchSize}
             onClick={openWriteDiaryModal}
             className={styles.writeButton}
             data-testid="diaries-func-link-write"
